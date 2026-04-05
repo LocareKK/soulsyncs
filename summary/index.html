@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブランディング戦略 要旨 | Soul Sync's 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --white: #f5f5f5;
+    --gray: #888;
+    --light: #ccc;
+    --accent: #c8a96e;
+    --red: #e05252;
+    --green: #52c07a;
+    --blue: #5295e0;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 64px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  .header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .header-title em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--gray);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    font-size: 12px;
+    color: var(--gray);
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .header-meta strong { color: var(--accent); }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 56px 64px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    line-height: 1.4;
+  }
+
+  .section-title em { color: var(--accent); font-style: normal; }
+
+  /* ── ISSUE BLOCK ── */
+  .issue-box {
+    background: rgba(224, 82, 82, 0.06);
+    border: 1px solid rgba(224, 82, 82, 0.25);
+    border-left: 4px solid var(--red);
+    border-radius: 0 2px 2px 0;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--light);
+  }
+
+  .issue-box strong { color: var(--white); }
+
+  /* ── STRATEGY CARDS ── */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .s-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 2px;
+    padding: 24px;
+  }
+
+  .s-card-num {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .s-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .s-card-body {
+    font-size: 13px;
+    color: var(--light);
+    line-height: 1.8;
+  }
+
+  /* ── DORAEMON VISUAL ── */
+  .doraemon-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px;
+    margin-top: 24px;
+  }
+
+  .d-node { text-align: center; padding: 16px; }
+  .d-icon { font-size: 40px; display: block; margin-bottom: 10px; }
+  .d-label { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .d-sub { font-size: 11px; color: var(--gray); }
+  .d-arrow { font-size: 24px; color: var(--accent); opacity: 0.5; padding: 0 8px; }
+
+  /* ── EXECUTION TABLE ── */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .exec-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 24px;
+  }
+
+  .exec-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exec-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  .badge-ig { background: rgba(200,100,200,0.12); color: #e882e8; border: 1px solid rgba(200,100,200,0.3); }
+  .badge-note { background: rgba(82,192,122,0.12); color: #82e0a0; border: 1px solid rgba(82,192,122,0.3); }
+  .badge-web { background: rgba(82,149,224,0.12); color: #82b9e8; border: 1px solid rgba(82,149,224,0.3); }
+  .badge-kling { background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
+
+  .exec-card-title { font-size: 15px; font-weight: 700; }
+  .exec-card-role { font-size: 11px; color: var(--gray); }
+
+  .exec-card ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--light);
+    line-height: 1.9;
+  }
+
+  .exec-card ul li::before { content: '→ '; color: var(--accent); }
+
+  /* ── COST BOX ── */
+  .cost-highlight {
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 2px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cost-num {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .cost-desc { font-size: 13px; color: var(--light); line-height: 1.7; }
+
+  /* ── KPI ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .kpi-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .kpi-val {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .kpi-lbl { font-size: 11px; color: var(--gray); letter-spacing: 1px; margin-bottom: 6px; }
+  .kpi-period { font-size: 11px; color: var(--light); }
+
+  /* ── PHASE TABLE ── */
+  .phase-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .phase-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    align-items: start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 20px 24px;
+  }
+
+  .phase-label { font-size: 11px; color: var(--gray); line-height: 1.6; }
+  .phase-period { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+
+  .phase-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 4px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--light);
+  }
+
+  /* ── ROLE TABLE ── */
+  .role-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+  .role-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .role-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--light);
+    vertical-align: top;
+  }
+
+  .role-table td:first-child { color: var(--white); font-weight: 500; width: 140px; }
+  .role-table td:nth-child(2) { color: var(--accent); width: 200px; }
+
+  /* ── CLOSING ── */
+  .closing {
+    padding: 56px 64px;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .closing-message {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.7;
+    max-width: 540px;
+  }
+
+  .closing-message em { color: var(--accent); font-style: normal; }
+
+  .detail-btn {
+    display: inline-block;
+    padding: 16px 32px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .detail-btn:hover { background: var(--accent); color: var(--black); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header, .section, .closing { padding: 40px 24px; }
+    .header-title { font-size: 28px; }
+    .strategy-grid, .exec-grid, .kpi-row { grid-template-columns: 1fr; }
+    .doraemon-row { grid-template-columns: 1fr; }
+    .d-arrow { display: none; }
+    .phase-item { grid-template-columns: 1fr; }
+    .closing { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .header, .section, .closing { padding: 32px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-eyebrow">Soul Sync's Inc. — 広報戦略方針 2026</div>
+  <h1 class="header-title">AI広報で、<em>先頭走者</em>になる。</h1>
+  <p class="header-sub">ドラえもん型ブランド戦略 ／ 全社方針共有</p>
+  <div class="header-meta">
+    <div>報告者：<strong>黒沼</strong></div>
+    <div>日付：<strong>2026年4月6日</strong></div>
+    <div>対象：<strong>経営幹部</strong></div>
+  </div>
+</div>
+
+<!-- ══ 01: 現状認識 ══ -->
+<div class="section">
+  <div class="section-label">01 — 現状認識</div>
+  <h2 class="section-title">強い素材がある。<em>届け方が分散している。</em></h2>
+
+  <div class="issue-box">
+    <strong>課題：</strong>コーポレートサイト・Instagram（@soulkun_ai）・noteの3媒体で発信しているが、メッセージ・トーン・ビジュアルがバラバラ。「ソウルシンクスとは何者か」が一言で伝わっていない。
+  </div>
+  <div class="issue-box">
+    <strong>機会：</strong>「中小企業 × AI広報」という領域に本気で取り組む競合はほぼ存在しない。自社が困っていた経験を語れる圧倒的なオーセンティシティがある。<strong style="color:var(--green);">今が先行者優位を獲れる唯一のタイミング。</strong>
+  </div>
+</div>
+
+<!-- ══ 02: 戦略の核心 ══ -->
+<div class="section">
+  <div class="section-label">02 — 戦略の核心</div>
+  <h2 class="section-title"><em>ドラえもん型</em>ブランド構造で統一する</h2>
+
+  <div class="strategy-grid">
+    <div class="s-card">
+      <div class="s-card-num">POINT 01</div>
+      <div class="s-card-title">物語の軸を決める</div>
+      <div class="s-card-body">ソウルくん（AI）× 菊地社長（人間）が、困れる中小企業経営者を助ける物語をブランドの骨格に。全媒体でこの世界観を統一する。</div>
+    </div>
+    <div class="s-card">
+      <div class="s-card-num">POINT 02</div>
+      <div class="s-card-title">自社で実証し、発信する</div>
+      <div class="s-card-body">広報・営業（発注ナビ）・採用育成（Re:nk）・納品体制の4領域でAIを自ら実践。「やってみた」の記録そのものが最強のコンテンツになる。</div>
+    </div>
+    <div class="s-card">
+      <div class="s-card-num">POINT 03</div>
+      <div class="s-card-title">3媒体に役割を持たせる</div>
+      <div class="s-card-body">Instagram（認知）→ note（共感）→ コーポレートWeb（信頼・CV）のファネルを設計。バラバラの発信を、一本の導線に束ねる。</div>
+    </div>
+  </div>
+
+  <div class="doraemon-row">
+    <div class="d-node">
+      <span class="d-icon">🐺</span>
+      <div class="d-label">ソウルくん</div>
+      <div class="d-sub">＝ ドラえもん<br>AIの力で道具を出す</div>
+    </div>
+    <div class="d-arrow">×</div>
+    <div class="d-node">
+      <span class="d-icon">👔</span>
+      <div class="d-label">菊地 社長</div>
+      <div class="d-sub">＝ のびた<br>本気で挑む人間の顔</div>
+    </div>
+    <div class="d-arrow">→</div>
+    <div class="d-node">
+      <span class="d-icon">😣</span>
+      <div class="d-label">中小企業経営者</div>
+      <div class="d-sub">＝ 助けられる側<br>広報・集客・採用で悩む</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 03: 実行体制 ══ -->
+<div class="section">
+  <div class="section-label">03 — 実行体制</div>
+  <h2 class="section-title">Kling AIで<em>撮影ゼロ・月26本</em>を量産する</h2>
+
+  <div class="exec-grid">
+    <div class="exec-card">
+      <div class="exec-card-header">
+        <span class="exec-badge badge-kling">Kling AI</span>
+        <div>
+          <div class="exec-card-title">動画量産エンジン</div>
+          <div class="exec-card-role">菊地社長の時間ゼロで週複数本</div>
+        </div>
+      </div>
+      <ul>
+        <li>ソウルくんキャラ動画を月26本生成</li>
+        <li>「今日もソウルくんに聞いてみた」シリーズ</li>
+        <li>「#我が社のAI活用」実録シリーズ</li>
+        <li>note記事のReels要約 → Web誘導</li>
+      </ul>
+      <div class="cost-highlight">
+        <div class="cost-num">¥19,000</div>
+        <div class="cost-desc">月額（$128）で動画26本分のクレジット。<br>大手制作会社の<strong style="color:var(--white);">100分の1以下</strong>のコストで量産体制を確立。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="exec-card" style="margin-bottom:12px;">
+        <div class="exec-card-header">
+          <span class="exec-badge badge-ig">Instagram</span>
+          <div>
+            <div class="exec-card-title">@soulkun_ai — 認知の突破口</div>
+            <div class="exec-card-role">週3〜4本 Reels</div>
+          </div>
+        </div>
+        <ul>
+          <li>ソウルくんReelsでエンタメ認知を獲得</li>
+          <li>フォロワー → note・Webへの誘導CTA統一</li>
+        </ul>
+      </div>
+      <div class="exec-card" style="margin-bottom:12px;">
+        <div class="exec-card-header">
+          <span class="exec-badge badge-note">note</span>
+          <div>
+            <div class="exec-card-title">soulsyncs_ai — 共感の深堀り</div>
+            <div class="exec-card-role">月2本 長文記事</div>
+          </div>
+        </div>
+        <ul>
+          <li>「自社でやってみた」エピソード連載</li>
+          <li>中小企業×AI広報のSEO記事で検索流入</li>
+        </ul>
+      </div>
+      <div class="exec-card">
+        <div class="exec-card-header">
+          <span class="exec-badge badge-web">Web</span>
+          <div>
+            <div class="exec-card-title">Corporate Site — 信頼の証明</div>
+            <div class="exec-card-role">月2回 実績・事例更新</div>
+          </div>
+        </div>
+        <ul>
+          <li>AI専用ページ新設・実績数値を鮮度維持</li>
+          <li>問い合わせへの最終ゲートウェイとして整備</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 04: KPI ══ -->
+<div class="section">
+  <div class="section-label">04 — KPI・成果指標</div>
+  <h2 class="section-title">6ヶ月以内に<em>数値で証明</em>する</h2>
+
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="kpi-val">×3</div>
+      <div class="kpi-lbl">月間問い合わせ数</div>
+      <div class="kpi-period">現状比 ／ 6ヶ月</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-val">+5K</div>
+      <div class="kpi-lbl">IGフォロワー増加</div>
+      <div class="kpi-period">累積 ／ 3ヶ月</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-val">24本</div>
+      <div class="kpi-lbl">note年間記事数</div>
+      <div class="kpi-period">月2本維持</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-val">20件</div>
+      <div class="kpi-lbl">発注ナビ月間応募</div>
+      <div class="kpi-period">Phase 2 達成目標</div>
+    </div>
+  </div>
+
+  <div class="phase-list">
+    <div class="phase-item">
+      <div class="phase-label">
+        <div class="phase-period">Phase 1</div>
+        〜4月末<br>即時着手
+      </div>
+      <div class="phase-actions">
+        <span class="chip">ブランドガイドライン策定</span>
+        <span class="chip">Kling AI契約・テスト制作</span>
+        <span class="chip">3媒体のCTA導線統一</span>
+        <span class="chip">noteカレンダー作成</span>
+        <span class="chip">WebにAIページ新設</span>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-label">
+        <div class="phase-period" style="color:var(--blue);">Phase 2</div>
+        5〜6月<br>発信加速
+      </div>
+      <div class="phase-actions">
+        <span class="chip">Reels週2本体制スタート</span>
+        <span class="chip">note月2本連載開始</span>
+        <span class="chip">発注ナビAI応募ルーティン確立</span>
+        <span class="chip">プレスキット作成</span>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-label">
+        <div class="phase-period" style="color:var(--green);">Phase 3</div>
+        7月〜<br>計測・改善
+      </div>
+      <div class="phase-actions">
+        <span class="chip">月次KPIレポート</span>
+        <span class="chip">問い合わせ経路分析</span>
+        <span class="chip">SEO効果検証</span>
+        <span class="chip">次フェーズ戦略立案</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 05: 各部門への期待 ══ -->
+<div class="section">
+  <div class="section-label">05 — 各部門への期待事項</div>
+  <h2 class="section-title">この方針のもと、<em>各自に動いてほしいこと</em></h2>
+
+  <table class="role-table">
+    <thead>
+      <tr>
+        <th>担当</th>
+        <th>期待するアクション</th>
+        <th>背景・理由</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>菊地 CEO</td>
+        <td>月1回 ブランド思想のインプット提供</td>
+        <td>Kling AI動画化のための「言葉・哲学」の源泉。社長の声があることでコンテンツの重みが変わる。撮影は不要。</td>
+      </tr>
+      <tr>
+        <td>コンテンツ担当</td>
+        <td>Kling AI運用・Reels制作・note執筆の実務推進</td>
+        <td>月26本の動画量産と月2本のnote連載を回す中心。Phase 1でKling AIのテスト運用から着手。</td>
+      </tr>
+      <tr>
+        <td>営業担当</td>
+        <td>発注ナビへのAI自動応募ルーティン構築</td>
+        <td>AI広報の自社実践として「営業DX」をコンテンツ化。商談機会の最大化と発信素材の両立が目的。</td>
+      </tr>
+      <tr>
+        <td>Re:nk担当</td>
+        <td>採用ブランディングとInstagramの連携設計</td>
+        <td>「価値観採用 × AI育成」を訴求する採用コンテンツをInstagramに統合。採用強化と認知拡大を同時に。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ CLOSING ══ -->
+<div class="closing">
+  <div class="closing-message">
+    「私たちはすでに、伝えるべき物語を持っている。<br>
+    あとは、<em>一本の声で、同時に届けるだけだ。</em>」
+  </div>
+  <a href="../" class="detail-btn">詳細資料を見る →</a>
+</div>
+
+</body>
+</html>
