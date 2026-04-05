@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ソウルシンクス ブランディング戦略 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --white: #f5f5f5;
+    --gray: #888888;
+    --light-gray: #cccccc;
+    --accent: #c8a96e;
+    --accent-light: #e8c98e;
+    --red: #e05252;
+    --green: #52c07a;
+    --blue: #5295e0;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.7;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--accent); }
+
+  /* ===== SLIDE BASE ===== */
+  .slide {
+    width: 100%;
+    min-height: 100vh;
+    padding: 80px 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+  }
+
+  /* ===== FADE IN ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== TITLE SLIDE ===== */
+  .slide-title {
+    background: var(--dark);
+    text-align: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-title::before { display: none; }
+
+  .slide-title::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .grid-lines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .brand-mark {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .main-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .main-title span { color: var(--accent); }
+
+  .sub-title {
+    font-size: 18px;
+    color: var(--gray);
+    margin-bottom: 64px;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 48px;
+    font-size: 13px;
+    color: var(--gray);
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .meta-row span { color: var(--accent); }
+
+  /* ===== SECTION HEADER ===== */
+  .slide-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .slide-heading {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .slide-heading em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .slide-subheading {
+    font-size: 15px;
+    color: var(--gray);
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* ===== DIVIDER ===== */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 80px;
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-divider span {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gray);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== EXECUTIVE SUMMARY ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .summary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 28px;
+    border-radius: 2px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  .summary-card .number {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .summary-card .label {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .summary-card .desc {
+    font-size: 14px;
+    color: var(--light-gray);
+    line-height: 1.6;
+  }
+
+  .conclusion-box {
+    background: linear-gradient(135deg, rgba(200, 169, 110, 0.12), rgba(200, 169, 110, 0.04));
+    border: 1px solid rgba(200, 169, 110, 0.4);
+    border-radius: 2px;
+    padding: 28px 36px;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .conclusion-box strong { color: var(--accent); }
+
+  /* ===== DORAEMON STRUCTURE ===== */
+  .doraemon-structure {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 40px 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 40px;
+  }
+
+  .structure-node {
+    text-align: center;
+    padding: 24px;
+  }
+
+  .structure-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .structure-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .structure-desc {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .structure-arrow {
+    font-size: 32px;
+    color: var(--accent);
+    opacity: 0.6;
+    padding: 0 8px;
+  }
+
+  .structure-reasons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .reason-item {
+    background: rgba(200, 169, 110, 0.06);
+    border: 1px solid rgba(200, 169, 110, 0.2);
+    border-radius: 2px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .reason-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .reason-text {
+    font-size: 12px;
+    color: var(--light-gray);
+    line-height: 1.5;
+  }
+
+  /* ===== KLING AI SECTION ===== */
+  .kling-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .kling-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 20px;
+    border-radius: 2px;
+    text-align: center;
+  }
+
+  .stat-box .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-box .stat-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  .kling-highlight {
+    background: rgba(82, 192, 122, 0.08);
+    border: 1px solid rgba(82, 192, 122, 0.25);
+    border-radius: 2px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .kling-highlight strong { color: var(--green); }
+
+  /* ===== CHANNEL GRID ===== */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .channel-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 28px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .channel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  .channel-icon {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .channel-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--gray);
+  }
+
+  .tag.accent {
+    border-color: rgba(200, 169, 110, 0.5);
+    color: var(--accent);
+    background: rgba(200, 169, 110, 0.08);
+  }
+
+  .insight-item {
+    font-size: 13px;
+    color: var(--light-gray);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .insight-item:last-child { border-bottom: none; }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .dot.neg { background: var(--red); }
+
+  /* ===== SELF PRACTICE SECTION ===== */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .practice-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 28px;
+    transition: transform 0.2s;
+  }
+
+  .practice-card:hover { transform: translateY(-4px); }
+
+  .practice-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .practice-icon {
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    background: rgba(200, 169, 110, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .practice-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .practice-role {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  /* ===== SWOT ===== */
+  .swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .swot-cell {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .swot-cell::before {
+    font-size: 80px;
+    font-weight: 900;
+    position: absolute;
+    right: 16px;
+    bottom: -16px;
+    opacity: 0.05;
+    line-height: 1;
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .swot-cell.strength::before { content: 'S'; color: var(--green); }
+  .swot-cell.weakness::before { content: 'W'; color: var(--red); }
+  .swot-cell.opportunity::before { content: 'O'; color: var(--blue); }
+  .swot-cell.threat::before { content: 'T'; color: var(--gray); }
+
+  .swot-cell.strength { border-top: 2px solid var(--green); }
+  .swot-cell.weakness { border-top: 2px solid var(--red); }
+  .swot-cell.opportunity { border-top: 2px solid var(--blue); }
+  .swot-cell.threat { border-top: 2px solid var(--gray); }
+
+  .swot-cell h4 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .swot-cell.strength h4 { color: var(--green); }
+  .swot-cell.weakness h4 { color: var(--red); }
+  .swot-cell.opportunity h4 { color: var(--blue); }
+  .swot-cell.threat h4 { color: var(--gray); }
+
+  .swot-cell ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--light-gray);
+    line-height: 1.9;
+    position: relative;
+    z-index: 1;
+  }
+
+  .swot-cell ul li::before {
+    content: '— ';
+    color: var(--gray);
+  }
+
+  /* ===== TARGET ===== */
+  .target-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .persona-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px;
+  }
+
+  .persona-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .persona-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #8b6914);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .persona-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .persona-role {
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  .persona-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .persona-row .key { color: var(--gray); font-size: 12px; }
+  .persona-row .val { color: var(--light-gray); }
+
+  .pain-list { margin-top: 24px; }
+
+  .pain-item {
+    background: rgba(224, 82, 82, 0.06);
+    border: 1px solid rgba(224, 82, 82, 0.2);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .pain-icon { color: var(--red); flex-shrink: 0; }
+
+  .value-list { margin-top: 0; }
+
+  .value-item {
+    background: rgba(82, 192, 122, 0.06);
+    border: 1px solid rgba(82, 192, 122, 0.2);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .value-icon { color: var(--green); flex-shrink: 0; }
+
+  /* ===== CHANNEL STRATEGY TABLE ===== */
+  .strategy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .strategy-table th {
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .strategy-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--light-gray);
+    line-height: 1.6;
+  }
+
+  .strategy-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .channel-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-web { background: rgba(82, 149, 224, 0.15); color: #82b9e8; border: 1px solid rgba(82, 149, 224, 0.3); }
+  .badge-ig { background: rgba(200, 100, 200, 0.15); color: #e882e8; border: 1px solid rgba(200, 100, 200, 0.3); }
+  .badge-note { background: rgba(82, 192, 122, 0.15); color: #82e0a0; border: 1px solid rgba(82, 192, 122, 0.3); }
+
+  /* ===== POSITIONING MAP ===== */
+  .position-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .position-map {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .position-axes {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    margin: 24px 0 16px;
+  }
+
+  /* 水平軸（X軸） */
+  .axis-h {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: rgba(200,169,110,0.3);
+    transform: translateY(-50%);
+  }
+
+  /* 水平軸の矢印 */
+  .axis-h::before {
+    content: '';
+    position: absolute;
+    right: -6px; top: -4px;
+    border-left: 8px solid rgba(200,169,110,0.5);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+  .axis-h::after {
+    content: '';
+    position: absolute;
+    left: -6px; top: -4px;
+    border-right: 8px solid rgba(200,169,110,0.5);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  /* 垂直軸（Y軸） */
+  .axis-v {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    bottom: 5%;
+    width: 1px;
+    background: rgba(200,169,110,0.3);
+    transform: translateX(-50%);
+  }
+
+  /* 垂直軸の矢印 */
+  .axis-v::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: -4px;
+    border-bottom: 8px solid rgba(200,169,110,0.5);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+  .axis-v::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: -4px;
+    border-top: 8px solid rgba(200,169,110,0.5);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+
+  /* ===== 軸ラベル — 棒の先端に配置 ===== */
+  /* 右端ラベル（人間性重視） */
+  .axis-label-right {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-200%);
+    font-size: 10px;
+    color: rgba(200,169,110,0.7);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* 左端ラベル（テクノロジー偏重） */
+  .axis-label-left {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-200%);
+    font-size: 10px;
+    color: rgba(200,169,110,0.7);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  /* 上端ラベル（中小特化） */
+  .axis-label-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(200,169,110,0.7);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-align: center;
+    padding-bottom: 4px;
+  }
+
+  /* 下端ラベル（大企業特化） */
+  .axis-label-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(200,169,110,0.7);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-align: center;
+    padding-top: 4px;
+  }
+
+  .pos-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+
+  .pos-dot.us {
+    background: var(--accent);
+    width: 18px;
+    height: 18px;
+    box-shadow: 0 0 20px rgba(200, 169, 110, 0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(200,169,110,0.5); }
+    70%  { box-shadow: 0 0 0 12px rgba(200,169,110,0); }
+    100% { box-shadow: 0 0 0 0 rgba(200,169,110,0); }
+  }
+
+  .pos-dot.comp { background: var(--gray); }
+
+  .pos-label {
+    position: absolute;
+    font-size: 11px;
+    transform: translate(-50%, calc(-100% - 8px));
+    white-space: nowrap;
+  }
+
+  .pos-label.us { color: var(--accent); font-weight: 600; }
+  .pos-label.comp { color: var(--gray); }
+
+  .differentiator-list { }
+
+  .diff-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 2px 2px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: transform 0.2s;
+  }
+
+  .diff-item:hover { transform: translateX(4px); }
+
+  .diff-item h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+
+  .diff-item p {
+    font-size: 13px;
+    color: var(--light-gray);
+    line-height: 1.7;
+  }
+
+  /* ===== KPI ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .kpi-card:hover { transform: translateY(-4px); }
+
+  .kpi-value {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .kpi-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .kpi-target { font-size: 12px; color: var(--light-gray); }
+
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .kpi-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kpi-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--light-gray);
+  }
+
+  .badge-priority {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .p-high { background: rgba(224, 82, 82, 0.15); color: #e88282; border: 1px solid rgba(224, 82, 82, 0.3); }
+  .p-mid { background: rgba(200, 169, 110, 0.15); color: var(--accent); border: 1px solid rgba(200, 169, 110, 0.3); }
+  .p-low { background: rgba(136, 136, 136, 0.15); color: var(--gray); border: 1px solid rgba(136, 136, 136, 0.3); }
+
+  /* ===== ACTION PLAN ===== */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -34px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--black);
+  }
+
+  .timeline-item.phase2 .timeline-dot { background: var(--blue); }
+  .timeline-item.phase3 .timeline-dot { background: var(--green); }
+
+  .timeline-phase {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .timeline-item.phase2 .timeline-phase { color: var(--blue); }
+  .timeline-item.phase3 .timeline-phase { color: var(--green); }
+
+  .timeline-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .action-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 5px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--light-gray);
+  }
+
+  /* ===== CLOSING ===== */
+  .slide-closing {
+    background: var(--dark);
+    text-align: center;
+    align-items: center;
+  }
+
+  .slide-closing::before { display: none; }
+
+  .closing-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 640px;
+  }
+
+  .closing-quote em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .closing-sub {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 48px;
+  }
+
+  .footer-brand {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--border);
+    text-transform: uppercase;
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+    text-decoration: none;
+    z-index: 99;
+  }
+
+  .back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .slide { padding: 80px 28px 64px; }
+    .nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .summary-grid, .channel-grid, .swot-grid, .kpi-grid, .practice-grid,
+    .structure-reasons { grid-template-columns: 1fr; }
+    .target-layout, .position-layout, .kling-grid { display: block; }
+    .doraemon-structure { grid-template-columns: 1fr; }
+    .structure-arrow { display: none; }
+    .main-title { font-size: 36px; }
+    .slide-heading { font-size: 28px; }
+    .kling-stats { grid-template-columns: 1fr; }
+    .section-divider { padding: 16px 28px; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .nav, .back-to-top { display: none; }
+    .slide { min-height: auto; padding: 40px 60px; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav">
+  <div class="nav-brand">Soul Sync's — Confidential</div>
+  <ul class="nav-links">
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#doraemon">Vision</a></li>
+    <li><a href="#kling">Kling AI</a></li>
+    <li><a href="#analysis">Analysis</a></li>
+    <li><a href="#swot">SWOT</a></li>
+    <li><a href="#target">Target</a></li>
+    <li><a href="#channel">Channel</a></li>
+    <li><a href="#positioning">Positioning</a></li>
+    <li><a href="#kpi">KPI</a></li>
+    <li><a href="#action">Action</a></li>
+  </ul>
+</nav>
+
+<!-- ===== SLIDE 1: TITLE ===== -->
+<div id="top" class="slide slide-title">
+  <div class="grid-lines"></div>
+  <div class="brand-mark">Soul Sync's Inc. — Confidential</div>
+  <h1 class="main-title">ブランディング<br>戦略<span> 2026</span></h1>
+  <p class="sub-title">「分散から統一へ」——<em style="color:var(--accent);font-style:normal;">ドラえもん型AI広報</em>で選ばれ続ける企業へ</p>
+  <div class="meta-row">
+    <div>報告者：<span>黒沼</span></div>
+    <div>対象：<span>経営幹部</span></div>
+    <div>日付：<span>2026年4月6日</span></div>
+    <div>分類：<span>機密</span></div>
+  </div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Executive Summary</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 2: EXECUTIVE SUMMARY ===== -->
+<div id="summary" class="slide fade-in">
+  <div class="slide-label">Executive Summary</div>
+  <h2 class="slide-heading">今日お伝えする<em>4つの結論</em></h2>
+  <p class="slide-subheading">分析・戦略・実行体制・アクションの全体像</p>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="number">01</div>
+      <div class="label">現状の課題</div>
+      <div class="desc">強い哲学と実績を持ちながら、3つのチャネルでメッセージが<strong>分散</strong>している。ブランドの「核」は存在するが、伝え方が統一されていない。</div>
+    </div>
+    <div class="summary-card">
+      <div class="number">02</div>
+      <div class="label">戦略の方向性</div>
+      <div class="desc"><strong>ドラえもん型構造</strong>：ソウルくん（AI）× 菊池社長（人間）で困れる中小企業経営者を助ける物語をブランドの軸に据える。</div>
+    </div>
+    <div class="summary-card">
+      <div class="number">03</div>
+      <div class="label">実行の核心</div>
+      <div class="desc"><strong>Kling AI</strong>を活用した動画量産（月約26本・月額約19,000円）で、菊池社長の撮影時間ゼロを実現しながらSNSに継続発信。</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+    <div class="summary-card">
+      <div class="number">04</div>
+      <div class="label">自社で証明する</div>
+      <div class="desc">広報・営業（発注ナビ）・採用育成（Re:nk）・納品体制の<strong>4領域でAIを自ら実践</strong>し、その実証をブランドコンテンツ化する。</div>
+    </div>
+    <div class="conclusion-box" style="margin-bottom:0;">
+      <strong>結論：</strong>ソウルシンクスは「勝てるブランド素材」をすでに持っている。<br>
+      今必要なのは、<strong>ドラえもん型の物語構造でAI活用の先頭走者として知られること</strong>だ。<br>
+      まずソウルシンクスの関係者の先の先まで、「本気のAI挑戦者」として届ける。
+    </div>
+  </div>
+
+  <div class="slide-number">02 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Brand Vision — ドラえもん型構造</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 3: DORAEMON STRUCTURE ===== -->
+<div id="doraemon" class="slide fade-in">
+  <div class="slide-label">Brand Architecture</div>
+  <h2 class="slide-heading"><em>ドラえもん型</em>ブランド構造</h2>
+  <p class="slide-subheading">AIと人間が組み合わさることで、困れる経営者を救う物語をブランドの軸に</p>
+
+  <div class="doraemon-structure">
+    <div class="structure-node">
+      <span class="structure-icon">🐺</span>
+      <div class="structure-title">ソウルくん</div>
+      <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px;">＝ ドラえもん</div>
+      <div class="structure-desc">AIの力を駆使する<br>ブランドの案内役<br>道具を出し続ける存在</div>
+    </div>
+    <div class="structure-arrow">×</div>
+    <div class="structure-node">
+      <span class="structure-icon">👔</span>
+      <div class="structure-title">菊池 社長</div>
+      <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:8px;">＝ のびた</div>
+      <div class="structure-desc">忙しい経営者でも<br>本気で挑む人間の顔<br>共感を生む存在</div>
+    </div>
+    <div class="structure-arrow">→</div>
+    <div class="structure-node">
+      <span class="structure-icon">😣</span>
+      <div class="structure-title">困れる中小企業経営者</div>
+      <div style="font-size:11px;letter-spacing:2px;color:var(--green);margin-bottom:8px;">＝ 助けられる側</div>
+      <div class="structure-desc">広報・集客・採用・DXで<br>悩む地方中小企業オーナー<br>ターゲット顧客</div>
+    </div>
+  </div>
+
+  <div class="structure-reasons">
+    <div class="reason-item">
+      <div class="reason-num">01</div>
+      <div class="reason-text"><strong style="color:var(--white);">役割が明確</strong><br>ソウルくんが「道具」、菊池社長が「使い手」、経営者が「救われる人」として物語が完結する</div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">02</div>
+      <div class="reason-text"><strong style="color:var(--white);">撮影ゼロ</strong><br>ソウルくん（AIキャラ）が主役のコンテンツなら菊池社長の時間を最小化できる。Kling AIで量産</div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">03</div>
+      <div class="reason-text"><strong style="color:var(--white);">共感の設計</strong><br>「私たちも困っていた」という自己開示が最強のブランディング。大手には絶対に真似できない</div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">04</div>
+      <div class="reason-text"><strong style="color:var(--white);">スケーラブル</strong><br>物語の軸が確立すれば、SNS・note・Web全媒体で同じ世界観を再現できる。ブランドが自走する</div>
+    </div>
+  </div>
+
+  <div class="slide-number">03 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Kling AI — コンテンツ量産計画</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 4: KLING AI ===== -->
+<div id="kling" class="slide fade-in">
+  <div class="slide-label">Content Production Strategy</div>
+  <h2 class="slide-heading">Kling AIで<em>撮影ゼロ・量産体制</em>を確立する</h2>
+  <p class="slide-subheading">月128ドルで動画26本を生成。菊池社長の時間を奪わずブランドコンテンツを回す</p>
+
+  <div class="kling-stats">
+    <div class="stat-box">
+      <div class="stat-value">¥19,000</div>
+      <div class="stat-label">月額コスト（$128）</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">26,000</div>
+      <div class="stat-label">月間クレジット</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">約26本</div>
+      <div class="stat-label">30〜60秒動画 / 月</div>
+    </div>
+  </div>
+
+  <div class="kling-grid">
+    <div>
+      <div class="kling-highlight">
+        <strong>✓ 菊池社長の撮影はゼロ</strong><br>
+        <span style="font-size:13px;color:var(--light-gray);">ソウルくんキャラを主役にした動画なら、社長の時間を一切使わずに週複数本のReelsを量産できる。忙しい経営者でも発信が止まらない仕組み。</span>
+      </div>
+
+      <div class="kling-highlight">
+        <strong>✓ バズらせてAI広報ブランドを確立</strong><br>
+        <span style="font-size:13px;color:var(--light-gray);">ドラえもん型のAI動画シリーズをReelsで展開。経営者の悩みをAIが解決するエピソード形式でエンタメ化し、アルゴリズムの拡散を狙う。</span>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:2px;padding:20px 24px;margin-top:16px;">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;">コンテンツシリーズ企画</div>
+        <div style="font-size:13px;color:var(--light-gray);line-height:1.8;">
+          📌 <strong style="color:white;">「今日もソウルくんに聞いてみた」</strong>シリーズ<br>
+          　→ 経営者の悩みをソウルくんが解決する60秒Reels<br><br>
+          📌 <strong style="color:white;">「#我が社のAI活用」</strong>記録シリーズ<br>
+          　→ 自社での実践風景をショート動画化（苦労・失敗も含む）<br><br>
+          📌 <strong style="color:white;">「AI広報の正体、教えます」</strong>解説シリーズ<br>
+          　→ note記事の要約をReels化、本文へ誘導するCTA設計
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:2px;padding:24px;height:100%;">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:16px;">3媒体の役割分担（ドラえもん型フロー）</div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="background:rgba(200,100,200,0.08);border:1px solid rgba(200,100,200,0.25);border-radius:2px;padding:16px;">
+            <div style="font-size:12px;color:#e882e8;margin-bottom:6px;letter-spacing:1px;">INSTAGRAM — 認知の突破口</div>
+            <div style="font-size:13px;color:var(--light-gray);">Kling AI動画でバズを狙う。ソウルくんが主役の短尺エピソードでエンタメ認知。</div>
+          </div>
+          <div style="text-align:center;color:var(--accent);font-size:18px;">↓</div>
+          <div style="background:rgba(82,192,122,0.08);border:1px solid rgba(82,192,122,0.25);border-radius:2px;padding:16px;">
+            <div style="font-size:12px;color:#82e0a0;margin-bottom:6px;letter-spacing:1px;">NOTE — 共感の深堀り</div>
+            <div style="font-size:13px;color:var(--light-gray);">開発エピソード・苦労話・実践記録で共感醸成。人間ソウルシンクスの素顔。</div>
+          </div>
+          <div style="text-align:center;color:var(--accent);font-size:18px;">↓</div>
+          <div style="background:rgba(82,149,224,0.08);border:1px solid rgba(82,149,224,0.25);border-radius:2px;padding:16px;">
+            <div style="font-size:12px;color:#82b9e8;margin-bottom:6px;letter-spacing:1px;">CORPORATE WEB — 信頼の証明</div>
+            <div style="font-size:13px;color:var(--light-gray);">実績数値・事例・サービス内容を集約。問い合わせへの最終ゲートウェイ。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-number">04 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>自社実践 — AI活用の実証者として</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 5: SELF PRACTICE ===== -->
+<div id="self-practice" class="slide fade-in">
+  <div class="slide-label">Self-Practice Branding</div>
+  <h2 class="slide-heading">自社が<em>最初の実証者</em>になる</h2>
+  <p class="slide-subheading">広報・営業・採用育成・納品体制の4領域でAIを実践し、その過程をブランドコンテンツ化する</p>
+
+  <div class="practice-grid">
+    <div class="practice-card">
+      <div class="practice-header">
+        <div class="practice-icon">📢</div>
+        <div>
+          <div class="practice-title">自社広報</div>
+          <div class="practice-role">SNS × Kling AI × note</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--light-gray);line-height:1.8;">
+        Kling AIで動画量産し、ドラえもん型SNS発信を実践。<br>
+        noteでは開発・苦労エピソードを継続連載。<br>
+        <strong style="color:var(--accent);">「自社でやってみた」こそが最強のコンテンツ。</strong>
+      </div>
+    </div>
+
+    <div class="practice-card">
+      <div class="practice-header">
+        <div class="practice-icon">🤝</div>
+        <div>
+          <div class="practice-title">自社営業</div>
+          <div class="practice-role">発注ナビ × AI自動応募</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--light-gray);line-height:1.8;">
+        発注ナビプラットフォームで案件情報をAIが収集・スコアリング。<br>
+        提案書・応募文もAIが下書きし、商談機会を最大化。<br>
+        <strong style="color:var(--accent);">「AIで営業を変えた」事例として発信。</strong>
+      </div>
+    </div>
+
+    <div class="practice-card">
+      <div class="practice-header">
+        <div class="practice-icon">🌱</div>
+        <div>
+          <div class="practice-title">採用・育成（Re:nk）</div>
+          <div class="practice-role">稼働者へのAIツール提供</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--light-gray);line-height:1.8;">
+        Re:nk稼働者にAIツールを提供し、生産性向上を実証。<br>
+        「価値観採用 × AI育成」という独自採用ブランドを確立。<br>
+        <strong style="color:var(--accent);">Instagramを採用ブランディングにも活用。</strong>
+      </div>
+    </div>
+
+    <div class="practice-card">
+      <div class="practice-header">
+        <div class="practice-icon">⚙️</div>
+        <div>
+          <div class="practice-title">納品体制強化</div>
+          <div class="practice-role">制作フローへのAI組み込み</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--light-gray);line-height:1.8;">
+        記事・動画・提案書の制作プロセスにAIを全面導入。<br>
+        クオリティを維持しながらスピードと量を両立。<br>
+        <strong style="color:var(--accent);">「AI導入で納品効率を〇〇%改善」として数値化・発信。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.3);border-radius:2px;padding:20px 28px;">
+    <strong style="color:var(--accent);">自社実践の意義：</strong>
+    <span style="font-size:14px;color:var(--light-gray);">
+      「AIを使いましょう」と提案する前に、自分たちが使い倒す。<strong style="color:white;">ソウルシンクスの人間力 × AI活用の掛け算こそが、真の差別化源泉</strong>であることを、まず関係者の先の先まで届ける。
+    </span>
+  </div>
+
+  <div class="slide-number">05 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Current State Analysis</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 6: CURRENT STATE ANALYSIS ===== -->
+<div id="analysis" class="slide fade-in">
+  <div class="slide-label">Current State Analysis</div>
+  <h2 class="slide-heading"><em>3媒体</em>のブランド現在地</h2>
+  <p class="slide-subheading">コーポレートサイト・Instagram・noteを横断分析</p>
+
+  <div class="channel-grid">
+    <div class="channel-card">
+      <div class="channel-icon">Web — Corporate Site</div>
+      <h3>哲学と実績を語る<br>「信頼の拠点」</h3>
+      <div class="tag-list">
+        <span class="tag accent">スローガン統一</span>
+        <span class="tag accent">実績明示</span>
+        <span class="tag">更新頻度：低</span>
+      </div>
+      <div class="insight-item"><div class="dot"></div><div>「人から始まる、経営変革。」という強力なスローガンが存在</div></div>
+      <div class="insight-item"><div class="dot"></div><div>費用削減1.5億円・売上200%等、具体数値で信頼構築</div></div>
+      <div class="insight-item"><div class="dot"></div><div>4事業の統一コピー「〇〇を、届ける。」フォーマットは秀逸</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：AIサービスとしての先進性の打ち出しが弱い</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：ブログ・実績更新が止まるとSEO・信頼度が低下</div></div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-icon">Instagram — @soulkun_ai</div>
+      <h3>AIキャラで親しみを生む<br>「共感の入口」</h3>
+      <div class="tag-list">
+        <span class="tag accent">キャラクター化</span>
+        <span class="tag accent">Reels重視</span>
+        <span class="tag">ターゲット：経営者</span>
+      </div>
+      <div class="insight-item"><div class="dot"></div><div>「ソウルくん🐺」という擬人化AIキャラは業界で唯一無二</div></div>
+      <div class="insight-item"><div class="dot"></div><div>Reels（動画）中心でアルゴリズム拡散に有利な設計</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：キャラとコーポレートサイトのトーン差が大きい</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：フォロワー獲得→問い合わせへの導線が不明確</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：ハッシュタグ・投稿頻度の最適化余地あり</div></div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-icon">note — soulsyncs_ai</div>
+      <h3>自社体験で共感を呼ぶ<br>「物語の発信地」</h3>
+      <div class="tag-list">
+        <span class="tag accent">透明性ブランディング</span>
+        <span class="tag accent">共感型コンテンツ</span>
+        <span class="tag">SEO効果あり</span>
+      </div>
+      <div class="insight-item"><div class="dot"></div><div>「自社が一番困っていた」という自己開示が高い共感を生成</div></div>
+      <div class="insight-item"><div class="dot"></div><div>「AIが、企業広報を変える。」というコンセプトが明確</div></div>
+      <div class="insight-item"><div class="dot"></div><div>キーワード（中小企業×AI広報）はSEO的に競合が少ない</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：記事数が少なく継続発信のエンジンが未確立</div></div>
+      <div class="insight-item"><div class="dot neg"></div><div>課題：コーポレートサイト・Instagramとの連携が弱い</div></div>
+    </div>
+  </div>
+  <div class="slide-number">06 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Brand Identity — SWOT</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 7: SWOT ===== -->
+<div id="swot" class="slide fade-in">
+  <div class="slide-label">Brand Identity — SWOT</div>
+  <h2 class="slide-heading">ブランドの<em>強み・課題・機会・脅威</em></h2>
+  <p class="slide-subheading">現状分析から戦略の根拠を明確化する</p>
+
+  <div class="swot-grid">
+    <div class="swot-cell strength">
+      <h4>Strength — 強み</h4>
+      <ul>
+        <li>「人から始まる変革」という差別化された哲学</li>
+        <li>千葉銀行・湘南美容など大手との実績・信頼</li>
+        <li>4事業横断の「届ける。」統一コピーフォーマット</li>
+        <li>AIキャラ「ソウルくん」による親しみやすさ</li>
+        <li>自社体験を語れる圧倒的なオーセンティシティ</li>
+        <li>"うまくやるより、本気でやる"という強烈なパーソナリティ</li>
+        <li>Kling AIによるコスパ高い動画量産体制</li>
+      </ul>
+    </div>
+    <div class="swot-cell weakness">
+      <h4>Weakness — 課題</h4>
+      <ul>
+        <li>3チャネル間のトーン・ビジュアルが不統一</li>
+        <li>コーポレートサイトのAI先進性訴求が不足</li>
+        <li>SNS→問い合わせへのCVR設計が曖昧</li>
+        <li>コンテンツ更新頻度の安定性が低い</li>
+        <li>採用（Re:nk）ブランドと企業ブランドの分離</li>
+      </ul>
+    </div>
+    <div class="swot-cell opportunity">
+      <h4>Opportunity — 機会</h4>
+      <ul>
+        <li>中小企業×AI広報領域は競合ほぼゼロ（先行者優位）</li>
+        <li>2026年、AI活用への経営者関心は過去最高水準</li>
+        <li>地方中小企業の広報DX需要が急拡大中</li>
+        <li>note・Reelsは長文SEOと動画拡散の両立が可能</li>
+        <li>発注ナビ等プラットフォームでの商談機会が拡大</li>
+        <li>千葉・首都圏の地域密着ブランドとして認知拡大余地大</li>
+      </ul>
+    </div>
+    <div class="swot-cell threat">
+      <h4>Threat — 脅威</h4>
+      <ul>
+        <li>大手PR会社のAI広報参入加速</li>
+        <li>AIツール民主化による「自社完結」トレンド</li>
+        <li>SNSアルゴリズム変動リスク（特にInstagram）</li>
+        <li>類似コンセプトの後発スタートアップ出現</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">07 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Target Strategy</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 8: TARGET STRATEGY ===== -->
+<div id="target" class="slide fade-in">
+  <div class="slide-label">Target Strategy</div>
+  <h2 class="slide-heading"><em>誰に</em>・何を・どう届けるか</h2>
+  <p class="slide-subheading">まず関係者の先の先から同心円状に広げる「コミュニティ型拡散」</p>
+
+  <div class="target-layout">
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">👔</div>
+        <div>
+          <div class="persona-name">コアペルソナ：地方中小企業オーナー</div>
+          <div class="persona-role">従業員10〜100名 / 創業10年以上 / 千葉・関東圏</div>
+        </div>
+      </div>
+      <div class="persona-row"><span class="key">年齢</span><span class="val">40〜60代</span></div>
+      <div class="persona-row"><span class="key">広報予算</span><span class="val">月10〜50万円（または専任なし）</span></div>
+      <div class="persona-row"><span class="key">AI利用経験</span><span class="val">ChatGPTは知っているが業務活用未着手</span></div>
+      <div class="persona-row"><span class="key">情報収集</span><span class="val">経営者交流会・SNS・知人紹介</span></div>
+      <div class="persona-row"><span class="key">購買決定</span><span class="val">「信頼できる人から買いたい」タイプ</span></div>
+
+      <div class="pain-list">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--red);margin-bottom:10px;text-transform:uppercase;">Pain Points</div>
+        <div class="pain-item"><span class="pain-icon">▸</span>「広報したいが何から始めれば分からない」</div>
+        <div class="pain-item"><span class="pain-icon">▸</span>「SNSは社員がやっているが成果が出ない」</div>
+        <div class="pain-item"><span class="pain-icon">▸</span>「AIが良いとは聞くが信頼できる相手がいない」</div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;letter-spacing:2px;color:var(--green);margin-bottom:14px;text-transform:uppercase;">Our Value to Them</div>
+      <div class="value-list">
+        <div class="value-item"><span class="value-icon">✓</span>同じ立場（中小企業）だからこその「共感の信頼」</div>
+        <div class="value-item"><span class="value-icon">✓</span>AIを使いながら"人間性"を失わない伴走型支援</div>
+        <div class="value-item"><span class="value-icon">✓</span>成果数値（売上200%・1.5億削減）による「証拠の安心」</div>
+        <div class="value-item"><span class="value-icon">✓</span>千葉銀行等の地域有力企業との繋がりによる「権威の安心」</div>
+      </div>
+
+      <div style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:2px;padding:24px;">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;text-transform:uppercase;">Key Message</div>
+        <div style="font-size:15px;line-height:1.8;color:var(--light-gray);">
+          「私たちも、あなたと同じ課題を抱えていた。<br>
+          だから本気で、隣で一緒に変えていける。<br>
+          <strong style="color:var(--accent);">AIで広報を変えるのは、人のためだ。</strong>」
+        </div>
+      </div>
+
+      <div style="margin-top:20px;background:var(--card);border:1px solid var(--border);border-radius:2px;padding:24px;">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--blue);margin-bottom:12px;text-transform:uppercase;">展開マイルストーン</div>
+        <div style="font-size:13px;color:var(--light-gray);line-height:1.9;">
+          <strong style="color:white;">Step 1：</strong>ソウルシンクス関係者の先の先まで「本気のAI挑戦」を届ける<br>
+          <strong style="color:white;">Step 2：</strong>交流会・発注ナビ等で「知っている会社」へ昇格<br>
+          <strong style="color:white;">Step 3：</strong>「AI広報といえばソウルシンクス」の先行者認知を確立
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">08 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Channel Content Strategy</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 9: CHANNEL STRATEGY ===== -->
+<div id="channel" class="slide fade-in">
+  <div class="slide-label">Channel Content Strategy</div>
+  <h2 class="slide-heading">チャネル別<em>コンテンツ戦略</em></h2>
+  <p class="slide-subheading">各媒体の役割を定義し、統一ブランドで連携させる</p>
+
+  <table class="strategy-table">
+    <thead>
+      <tr>
+        <th>チャネル</th>
+        <th>役割（ファネル段階）</th>
+        <th>コンテンツ方針</th>
+        <th>投稿頻度</th>
+        <th>KPI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="channel-badge badge-web">Corporate Web</span></td>
+        <td>信頼・コンバージョン<br><small style="color:var(--gray);">（検討〜決定層）</small></td>
+        <td>
+          • 実績・数値を毎月更新（鮮度維持）<br>
+          • AIサービス専用ページ新設<br>
+          • 「AIが変えた事例」ストーリー型LP追加<br>
+          • note記事・Reelsへの回遊導線設置
+        </td>
+        <td>月2回<br><small style="color:var(--gray);">事例追加</small></td>
+        <td>問い合わせ数<br>回遊率</td>
+      </tr>
+      <tr>
+        <td><span class="channel-badge badge-ig">Instagram</span><br><small style="color:var(--gray);">@soulkun_ai</small></td>
+        <td>認知・共感<br><small style="color:var(--gray);">（潜在〜認知層）</small></td>
+        <td>
+          • ソウルくん🐺が「AI広報のリアル」を語るシリーズ<br>
+          • Kling AI動画で週複数本のReels量産<br>
+          • 経営者の悩みに答えるReels（60秒）<br>
+          • Webサイト・note記事への誘導CTAを統一
+        </td>
+        <td>週3〜4回<br><small style="color:var(--gray);">Reels+静止画</small></td>
+        <td>フォロワー数<br>リーチ数<br>プロフィール遷移率</td>
+      </tr>
+      <tr>
+        <td><span class="channel-badge badge-note">note</span><br><small style="color:var(--gray);">soulsyncs_ai</small></td>
+        <td>共感・信頼醸成<br><small style="color:var(--gray);">（認知〜検討層）</small></td>
+        <td>
+          • 「私たちが試した」シリーズの継続（月2本）<br>
+          • 開発エピソード・苦労話・失敗談（人間味の強化）<br>
+          • AI広報×中小企業のSEO記事（ロングテール狙い）<br>
+          • 読了後にサービスページへの自然な導線設計
+        </td>
+        <td>月2本<br><small style="color:var(--gray);">2,000字以上</small></td>
+        <td>記事閲覧数<br>スキ数<br>外部リンクCTR</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:24px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.3);border-radius:2px;padding:20px 28px;">
+    <strong style="color:var(--accent);">統一ルール：</strong>
+    <span style="font-size:14px;color:var(--light-gray);">
+      すべてのチャネルで「人間性 × AI × 本気」のトライアングルを表現。ビジュアルは「暗背景 × ゴールド系アクセント」で統一し、ソウルくんは各媒体の「案内役」として継続登場させる。
+    </span>
+  </div>
+  <div class="slide-number">09 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Differentiation & Positioning</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 10: POSITIONING ===== -->
+<div id="positioning" class="slide fade-in">
+  <div class="slide-label">Differentiation & Positioning</div>
+  <h2 class="slide-heading">なぜ<em>私たちが選ばれるのか</em></h2>
+  <p class="slide-subheading">競合との差別化軸と、独自のポジションを定義する</p>
+
+  <div class="position-layout">
+    <div>
+      <div class="position-map">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--accent);text-align:center;margin-bottom:4px;">ポジショニングマップ</div>
+
+        <div class="position-axes">
+          <!-- 水平軸 -->
+          <div class="axis-h"></div>
+          <!-- 垂直軸 -->
+          <div class="axis-v"></div>
+
+          <!-- 軸ラベル：棒の先端に配置 -->
+          <div class="axis-label-right">人間性重視 →</div>
+          <div class="axis-label-left">← テクノロジー偏重</div>
+          <div class="axis-label-top">中小特化 ↑</div>
+          <div class="axis-label-bottom">↓ 大企業特化</div>
+
+          <!-- Us -->
+          <div class="pos-dot us" style="left:75%;top:22%;"></div>
+          <div class="pos-label us" style="left:75%;top:22%;">Soul Sync's</div>
+
+          <!-- Competitors -->
+          <div class="pos-dot comp" style="left:78%;top:72%;"></div>
+          <div class="pos-label comp" style="left:78%;top:72%;">大手PR会社</div>
+
+          <div class="pos-dot comp" style="left:28%;top:38%;"></div>
+          <div class="pos-label comp" style="left:28%;top:38%;">AIツールSaaS</div>
+
+          <div class="pos-dot comp" style="left:24%;top:68%;"></div>
+          <div class="pos-label comp" style="left:24%;top:68%;">地場制作会社</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:2px;padding:20px 24px;">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;text-transform:uppercase;">独自ポジション定義</div>
+        <div style="font-size:14px;line-height:1.8;color:var(--light-gray);">
+          <strong style="color:white;">「中小企業専門 × AI活用 × 人間性ブランディング」</strong><br>
+          この3つが揃う競合は現時点で存在しない。<br>
+          先行者優位を今すぐ確立すべきフィールドである。
+        </div>
+      </div>
+    </div>
+
+    <div class="differentiator-list">
+      <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:20px;text-transform:uppercase;">3つの差別化軸</div>
+
+      <div class="diff-item">
+        <h4>01 — 共感から始まる信頼</h4>
+        <p>「私たちも困っていた」という自己開示は、大手PR会社には絶対に真似できない。同じ立場から語るからこそ響く「共感の信頼」が最強の差別化源泉。</p>
+      </div>
+
+      <div class="diff-item">
+        <h4>02 — AIをキャラクター化する独自手法</h4>
+        <p>ソウルくん🐺というAI広報キャラクターは、冷たいテクノロジーに温かい人格を与える。AIの利便性と人間の親しみを同時に体験させる設計は業界初。Kling AIで動画量産も可能。</p>
+      </div>
+
+      <div class="diff-item">
+        <h4>03 — 証明済みの成果と伴走姿勢</h4>
+        <p>実績数値（売上200%・費用削減1.5億）を持ちながら、「隣で伴走する」という姿勢を貫く。成果主義とリレーション主義の両立が他社との決定的な違い。</p>
+      </div>
+
+      <div style="margin-top:20px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.3);border-radius:2px;padding:16px 20px;">
+        <div style="font-size:12px;color:var(--accent);margin-bottom:8px;">ブランドエッセンス（一言で言うと）</div>
+        <div style="font-size:16px;font-weight:600;line-height:1.6;">"AIという技術を、人の可能性のために使う。"</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">10 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>KPI & Action Plan</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== SLIDE 11: KPI ===== -->
+<div id="kpi" class="slide fade-in">
+  <div class="slide-label">KPI & Metrics</div>
+  <h2 class="slide-heading">何で<em>成果を測るか</em></h2>
+  <p class="slide-subheading">6ヶ月以内に可視化できる指標で戦略の効果を証明する</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-value">×3</div>
+      <div class="kpi-label">月間問い合わせ数</div>
+      <div class="kpi-target">現状比 6ヶ月以内</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">+5K</div>
+      <div class="kpi-label">IGフォロワー増加</div>
+      <div class="kpi-target">3ヶ月以内の累積</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">24本</div>
+      <div class="kpi-label">note記事本数</div>
+      <div class="kpi-target">年間（月2本維持）</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">Top5</div>
+      <div class="kpi-label">SEO順位目標</div>
+      <div class="kpi-target">「中小企業 AI広報」等</div>
+    </div>
+  </div>
+
+  <table class="kpi-table">
+    <thead>
+      <tr>
+        <th>領域</th>
+        <th>指標</th>
+        <th>現状</th>
+        <th>3ヶ月目標</th>
+        <th>6ヶ月目標</th>
+        <th>優先度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>認知</td>
+        <td>Instagramリーチ数（月）</td>
+        <td>—</td>
+        <td>50,000</td>
+        <td>150,000</td>
+        <td><span class="badge-priority p-high">高</span></td>
+      </tr>
+      <tr>
+        <td>認知</td>
+        <td>note月間閲覧数</td>
+        <td>—</td>
+        <td>3,000</td>
+        <td>15,000</td>
+        <td><span class="badge-priority p-high">高</span></td>
+      </tr>
+      <tr>
+        <td>認知</td>
+        <td>AI動画Reels投稿本数（累積）</td>
+        <td>—</td>
+        <td>12本</td>
+        <td>15本</td>
+        <td><span class="badge-priority p-high">高</span></td>
+      </tr>
+      <tr>
+        <td>信頼</td>
+        <td>コーポレートサイト月間UU</td>
+        <td>—</td>
+        <td>現状+50%</td>
+        <td>現状+150%</td>
+        <td><span class="badge-priority p-mid">中</span></td>
+      </tr>
+      <tr>
+        <td>CV</td>
+        <td>月間問い合わせ数</td>
+        <td>—</td>
+        <td>現状+100%</td>
+        <td>現状+200%</td>
+        <td><span class="badge-priority p-high">高</span></td>
+      </tr>
+      <tr>
+        <td>営業</td>
+        <td>発注ナビ経由月間応募数</td>
+        <td>—</td>
+        <td>10件</td>
+        <td>20件</td>
+        <td><span class="badge-priority p-high">高</span></td>
+      </tr>
+      <tr>
+        <td>採用</td>
+        <td>採用応募数（Re:nk経由）</td>
+        <td>—</td>
+        <td>—</td>
+        <td>前年比+30%</td>
+        <td><span class="badge-priority p-mid">中</span></td>
+      </tr>
+      <tr>
+        <td>ブランド</td>
+        <td>メディア掲載数（年間）</td>
+        <td>—</td>
+        <td>2件</td>
+        <td>6件</td>
+        <td><span class="badge-priority p-low">低</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="slide-number">11 / 11</div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span>Action Plan</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- ===== ACTION PLAN ===== -->
+<div id="action" class="slide fade-in">
+  <div class="slide-label">Action Plan</div>
+  <h2 class="slide-heading">今後<em>90日間</em>の優先アクション</h2>
+  <p class="slide-subheading">「分散→統一」を実現するための具体的ステップ</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase 1 — 即時着手（〜4月末）</div>
+        <div class="timeline-title">ブランド統一基盤の構築</div>
+        <div class="action-chips">
+          <span class="chip">ブランドガイドライン策定</span>
+          <span class="chip">コーポレートサイトにAIページ新設</span>
+          <span class="chip">Instagramプロフ文言統一</span>
+          <span class="chip">3媒体のCTA導線設計</span>
+          <span class="chip">Kling AI契約・テスト制作開始</span>
+          <span class="chip">noteコンテンツカレンダー作成</span>
+        </div>
+      </div>
+
+      <div class="timeline-item phase2">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase 2 — 発信加速（5〜6月）</div>
+        <div class="timeline-title">コンテンツエンジンの稼働</div>
+        <div class="action-chips">
+          <span class="chip">Reels週2本体制スタート</span>
+          <span class="chip">Kling AI動画シリーズ量産</span>
+          <span class="chip">note月2本連載開始</span>
+          <span class="chip">成果事例のストーリー記事化</span>
+          <span class="chip">発注ナビAI応募ルーティン確立</span>
+          <span class="chip">メディア向けプレスキット作成</span>
+        </div>
+      </div>
+
+      <div class="timeline-item phase3">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase 3 — 計測・改善（7月〜）</div>
+        <div class="timeline-title">KPI検証と戦略チューニング</div>
+        <div class="action-chips">
+          <span class="chip">月次KPIレポート開始</span>
+          <span class="chip">問い合わせ経路の分析</span>
+          <span class="chip">SEO記事の効果検証</span>
+          <span class="chip">幹部向け四半期報告</span>
+          <span class="chip">次フェーズ戦略立案</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:20px;text-transform:uppercase;">幹部への依頼事項</div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:0 2px 2px 0;padding:20px 24px;margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--red);margin-bottom:8px;">DECISION NEEDED</div>
+        <div style="font-size:14px;color:var(--light-gray);line-height:1.7;">ブランドガイドライン策定・コーポレートサイト改修の<strong style="color:white;">予算承認</strong>（目安：月20〜40万円）+ Kling AI月額¥19,000</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 2px 2px 0;padding:20px 24px;margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--accent);margin-bottom:8px;">RESOURCE REQUEST</div>
+        <div style="font-size:14px;color:var(--light-gray);line-height:1.7;">コンテンツ制作の<strong style="color:white;">専任担当者 or 外部パートナー</strong>のアサイン（note・Reels制作・Kling AI運用）</div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 2px 2px 0;padding:20px 24px;margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--blue);margin-bottom:8px;">EXECUTIVE ALIGNMENT</div>
+        <div style="font-size:14px;color:var(--light-gray);line-height:1.7;">代表・菊地CEOの<strong style="color:white;">ブランド思想のインプット</strong>（月1回）への協力。Kling AIで動画化するための言葉・哲学の提供。</div>
+      </div>
+
+      <div style="background:rgba(200,169,110,0.06);border:1px solid rgba(200,169,110,0.25);border-radius:2px;padding:20px 24px;margin-top:24px;">
+        <div style="font-size:12px;color:var(--accent);margin-bottom:10px;">黒沼 からの一言</div>
+        <div style="font-size:14px;color:var(--light-gray);line-height:1.8;font-style:italic;">
+          「私たちはすでに、伝えるべき物語を持っています。<br>
+          あとは、<strong style="color:white;">一本の声で、同時に届けるだけです。</strong><br>
+          ソウルシンクスの魂を込めた人間力こそが、AIと組み合わさったとき最強の武器になる。」
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CLOSING ===== -->
+<div class="slide slide-closing">
+  <div class="brand-mark">Soul Sync's Inc.</div>
+  <div class="closing-quote">
+    「<em>人から始まる、経営変革。</em>」<br>
+    その言葉を、全ての媒体で<br>
+    一つの声として届けよう。
+  </div>
+  <p class="closing-sub">ご質問・ご意見はお気軽に黒沼まで</p>
+  <div class="footer-brand">Soul Sync's — Confidential — 2026</div>
+</div>
+
+<!-- Back to Top -->
+<a href="#top" class="back-to-top" id="backToTop">↑</a>
+
+<script>
+  // ===== SCROLL ANIMATIONS =====
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  fadeElements.forEach(el => observer.observe(el));
+
+  // ===== NAV ACTIVE STATE =====
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-56px 0px 0px 0px' });
+
+  sections.forEach(s => navObserver.observe(s));
+
+  // ===== BACK TO TOP =====
+  const backBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) {
+      backBtn.classList.add('show');
+    } else {
+      backBtn.classList.remove('show');
+    }
+  });
+
+  // ===== SMOOTH SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
