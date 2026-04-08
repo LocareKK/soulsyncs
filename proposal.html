@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ソウルシンクス 組織構造改善 × AI運用 統合提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --white: #f5f5f5;
+    --gray: #888888;
+    --light-gray: #cccccc;
+    --accent: #c8a96e;
+    --accent-light: #e8c98e;
+    --red: #e05252;
+    --green: #52c07a;
+    --blue: #5295e0;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.7;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ===== SLIDE BASE ===== */
+  .slide {
+    width: 100%;
+    min-height: 100vh;
+    padding: 80px 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+  }
+
+  /* ===== FADE IN ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== TITLE SLIDE ===== */
+  .slide-title {
+    background: var(--dark);
+    text-align: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-title::before { display: none; }
+
+  .slide-title::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .grid-lines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .brand-mark {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .main-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .main-title span { color: var(--accent); }
+
+  .sub-title {
+    font-size: 18px;
+    color: var(--gray);
+    margin-bottom: 64px;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 48px;
+    font-size: 13px;
+    color: var(--gray);
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .meta-row span { color: var(--accent); }
+
+  /* ===== SECTION DIVIDER ===== */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 80px;
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-divider-text {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gray);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== SLIDE HEADER ===== */
+  .slide-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .slide-heading {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .slide-heading em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .slide-subheading {
+    font-size: 15px;
+    color: var(--gray);
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* ===== PROBLEM CARDS ===== */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .problem-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--red);
+    padding: 28px;
+    border-radius: 2px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .problem-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  .problem-num {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--red);
+    opacity: 0.5;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .problem-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .problem-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ===== FLOW SECTION ===== */
+  .flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 760px;
+  }
+
+  .flow-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .flow-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 42px;
+    bottom: -4px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+
+  .flow-dot {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-body {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    flex: 1;
+    margin-bottom: 16px;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .flow-body strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .flow-body p {
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  .ai-badge {
+    display: inline-block;
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    padding: 2px 8px;
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== TECH STACK ===== */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .stack-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 24px;
+    border-radius: 2px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stack-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  .stack-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .stack-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .stack-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .stack-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ===== RULES ===== */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .rule-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    border-radius: 2px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .rule-accent {
+    width: 3px;
+    height: 100%;
+    min-height: 40px;
+    background: var(--accent);
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+  .rule-card strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .rule-card p {
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  /* ===== SCHEDULE ===== */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .phase-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .phase-card.current {
+    border-color: rgba(200,169,110,0.4);
+    background: linear-gradient(135deg, rgba(200,169,110,0.06), var(--card));
+  }
+
+  .phase-card.current::before {
+    content: 'NOW';
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    border: 1px solid rgba(200,169,110,0.4);
+    padding: 2px 6px;
+  }
+
+  .phase-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .phase-card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .phase-period {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phase-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phase-items li {
+    font-size: 13px;
+    color: var(--light-gray);
+    display: flex;
+    gap: 8px;
+  }
+
+  .phase-items li::before {
+    content: '—';
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ===== KPI ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 40px 24px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kpi-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+  }
+
+  .kpi-value {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .kpi-label {
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  /* ===== CONCLUSION ===== */
+  .conclusion-box {
+    background: linear-gradient(135deg, rgba(200,169,110,0.12), rgba(200,169,110,0.04));
+    border: 1px solid rgba(200,169,110,0.4);
+    border-radius: 2px;
+    padding: 40px 48px;
+    font-size: 16px;
+    line-height: 1.9;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .conclusion-box strong { color: var(--accent); }
+
+  .conclusion-box p { color: var(--light-gray); margin-bottom: 1rem; }
+  .conclusion-box p:last-child { margin-bottom: 0; }
+
+  .deadline-badge {
+    display: inline-block;
+    margin-top: 24px;
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.4);
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 8px 20px;
+    text-transform: uppercase;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 32px 80px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .footer-brand {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  footer .footer-copy {
+    font-size: 11px;
+    color: var(--gray);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .slide { padding: 80px 32px 64px; }
+    .problem-grid,
+    .stack-grid,
+    .phase-grid,
+    .kpi-grid { grid-template-columns: 1fr; }
+    .rules-grid { grid-template-columns: 1fr; }
+    .nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .section-divider { padding: 24px 32px; }
+    footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
+    .conclusion-box { padding: 28px 24px; }
+    .meta-row { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">SoulSyncs · Internal Proposal</div>
+  <ul class="nav-links">
+    <li><a href="#problem">課題</a></li>
+    <li><a href="#flow">フロー</a></li>
+    <li><a href="#stack">ツール</a></li>
+    <li><a href="#rules">ルール</a></li>
+    <li><a href="#schedule">スケジュール</a></li>
+    <li><a href="#kpi">KPI</a></li>
+  </ul>
+</nav>
+
+<!-- TITLE -->
+<section class="slide slide-title" style="padding-top: 120px;">
+  <div class="grid-lines"></div>
+  <div class="brand-mark fade-in">SoulSyncs · 2026</div>
+  <h1 class="main-title fade-in">
+    組織構造改善 ×<br>
+    <span>AI運用</span> 統合提案
+  </h1>
+  <p class="sub-title fade-in">
+    依頼フローの構造化 ＋ Claude Code活用による工数削減・情報一元化
+  </p>
+  <div class="meta-row fade-in">
+    <div>提案日 <span>2026年4月8日</span></div>
+    <div>提案者 <span>黒沼賢人（執行役員 広報部長）</span></div>
+    <div>対象 <span>ソウルシンクス幹部一同</span></div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">01 · Problem</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- PROBLEM -->
+<section class="slide" id="problem">
+  <div class="slide-label fade-in">課題認識</div>
+  <h2 class="slide-heading fade-in">今、組織が抱える<em>4つの構造的課題</em></h2>
+  <p class="slide-subheading fade-in">営業リソースの不足・属人化・散逸・未整備——この4点が連鎖し、組織成長の阻害要因になっている。</p>
+  <div class="problem-grid fade-in">
+    <div class="problem-card" style="border-top-color: var(--accent);">
+      <div class="problem-num" style="color: var(--accent);">00</div>
+      <h3>営業人員の絶対数不足</h3>
+      <p>営業人員が少ない中、新規獲得と既存案件のディレクションを同一人物が担っている。リソースの二重消費が新規成長を阻んでいる。</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">01</div>
+      <h3>依頼経路の属人化</h3>
+      <p>制作・開発側への負担が偏りやすく、特定メンバーへの集中が慢性化している。</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">02</div>
+      <h3>口頭ベースの情報散逸</h3>
+      <p>依頼の背景・納期・優先度が口頭で流れ、トラブル時の責任判定が困難な状態。</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">03</div>
+      <h3>管理・履歴化の未整備</h3>
+      <p>依頼の一元管理・履歴化の仕組みがなく、組織としての学習蓄積ができていない。</p>
+    </div>
+  </div>
+  <div class="slide-number">01 / 06</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">02 · Solution Flow</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- FLOW -->
+<section class="slide" id="flow">
+  <div class="slide-label fade-in">依頼フロー設計</div>
+  <h2 class="slide-heading fade-in"><em>管理本部ハブ型</em>フローへの移行</h2>
+  <p class="slide-subheading fade-in">原則：全依頼は管理本部経由。営業から制作・開発への直接依頼は行わない。</p>
+  <div class="conclusion-box fade-in" style="text-align:left; margin: 0 0 40px; padding: 24px 32px; max-width: 100%;">
+    <p style="font-size:14px; margin-bottom:0;">
+      <strong>なぜ切り分けるのか：</strong>
+      営業人員が少ない現状において、新規獲得とディレクション管理の両立は構造的に無理がある。
+      既存案件のディレクションを管理本部が担うことで、<strong>営業は新規顧客獲得に専念</strong>できる環境をつくる。
+      役割の明確化は「効率化」ではなく、<strong>限られたリソースで最大の成果を出すための組織設計</strong>である。
+    </p>
+  </div>
+  <div class="flow-container fade-in">
+    <div class="flow-item">
+      <div class="flow-dot">01</div>
+      <div class="flow-body">
+        <strong>顧客ヒアリング</strong>
+        <p>営業が顧客と接触。要件・背景・納期を把握する。</p>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot">02</div>
+      <div class="flow-body">
+        <strong>依頼フォーム入力（音声 or テキスト）</strong>
+        <p>営業が依頼UIから入力。音声ファイルアップロードでも可。</p>
+        <span class="ai-badge">AI：音声→テキスト変換・要件整理・不足項目検出</span>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot">03</div>
+      <div class="flow-body">
+        <strong>Chatwork自動通知 → 管理本部受付</strong>
+        <p>Claude Codeが通知文を自動生成し、管理本部へ即時共有。</p>
+        <span class="ai-badge">AI：Chatwork通知文の自動生成</span>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot">04</div>
+      <div class="flow-body">
+        <strong>管理本部：内容確認 → 担当振り分け</strong>
+        <p>タスクダッシュボードにチケット登録し、適切な担当へアサイン。</p>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot">05</div>
+      <div class="flow-body">
+        <strong>担当者：実行 → 進捗管理</strong>
+        <p>LP制作・システム開発等を実施。ダッシュボードでリアルタイム進捗共有。</p>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-dot">06</div>
+      <div class="flow-body">
+        <strong>管理本部 最終確認 → 納品・完了報告</strong>
+        <p>Claude Codeが納品レポートを自動生成。Chatworkで営業・顧客へ完了通知。</p>
+        <span class="ai-badge">AI：納品レポート自動生成</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">02 / 06</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">03 · Tech Stack</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- STACK -->
+<section class="slide" id="stack">
+  <div class="slide-label fade-in">ツール構成</div>
+  <h2 class="slide-heading fade-in">外部SaaS不使用・<em>完全内製</em>アーキテクチャ</h2>
+  <p class="slide-subheading fade-in">Salesforce・Redmine・Notta等は使わず、Claude Codeスキル開発を軸に内製する。</p>
+  <div class="stack-grid fade-in">
+    <div class="stack-card">
+      <div class="stack-icon">⚡</div>
+      <h3>Claude Code</h3>
+      <p>カスタムスキル開発・業務自動化の中核。音声変換・レポート生成・通知文生成を担う。</p>
+      <div class="stack-tag">AI開発基盤</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">💬</div>
+      <h3>Chatwork</h3>
+      <p>依頼通知・進捗共有・承認フローのコミュニケーション基盤。既存環境を活用。</p>
+      <div class="stack-tag">社内コミュニケーション</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">📋</div>
+      <h3>依頼フォームUI</h3>
+      <p>音声録音 / ファイルアップロード / テキスト入力 → JSON出力 → Chatwork連携。</p>
+      <div class="stack-tag">Claudeアーティファクト（React）</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">📊</div>
+      <h3>タスクダッシュボードUI</h3>
+      <p>ステータス・担当者・納期の一覧管理。案件履歴ビューア・検索機能付き。</p>
+      <div class="stack-tag">Claudeアーティファクト（React）</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🎙️</div>
+      <h3>音声入力スキル</h3>
+      <p>音声録音 or 音声ファイル → テキスト変換（Whisper API） → 要件・納期・背景の自動抽出。</p>
+      <div class="stack-tag">Claude Codeカスタムスキル</div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">📈</div>
+      <h3>レポート自動生成スキル</h3>
+      <p>議事録・ヒアリングメモ → タスク分解。週次KPIレポートの自動生成。</p>
+      <div class="stack-tag">Claude Codeカスタムスキル</div>
+    </div>
+  </div>
+  <div class="slide-number">03 / 06</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">04 · Operation Rules</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- RULES -->
+<section class="slide" id="rules">
+  <div class="slide-label fade-in">運用ルール</div>
+  <h2 class="slide-heading fade-in"><em>即日適用</em>の6原則</h2>
+  <p class="slide-subheading fade-in">フロー遵守により、情報の漏れ・認識違いを構造的に防止する。</p>
+  <div class="rules-grid fade-in">
+    <div class="rule-card">
+      <div class="rule-accent"></div>
+      <div>
+        <strong>依頼入力必須</strong>
+        <p>全依頼は依頼UI経由（音声 or テキスト）。口頭・チャット直接依頼は原則無効。</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-accent"></div>
+      <div>
+        <strong>受付窓口の一本化</strong>
+        <p>管理本部が一括受付し、内容に応じて担当へ振り分ける。</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-accent"></div>
+      <div>
+        <strong>納期変更ルール</strong>
+        <p>原則24時間前までに管理本部へ共有。判断は管理本部が行う。</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-accent"></div>
+      <div>
+        <strong>報告経路</strong>
+        <p>進捗報告は管理本部経由で営業へ。週1報告を原則とする。</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-accent"></div>
+      <div>
+        <strong>緊急対応</strong>
+        <p>顧客トラブル時のみ管理本部判断で特例許可。通常フローが前提。</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-accent"></div>
+      <div>
+        <strong>浸透施策</strong>
+        <p>Chatworkグループ共有 ＋ 週1ミーティング（4/15〜）でフロー定着を図る。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">04 / 06</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">05 · Roadmap</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- SCHEDULE -->
+<section class="slide" id="schedule">
+  <div class="slide-label fade-in">実行スケジュール</div>
+  <h2 class="slide-heading fade-in">3フェーズで<em>組織へ埋め込む</em></h2>
+  <p class="slide-subheading fade-in">Phase 1は今すぐ動く。承認期限は4月14日。</p>
+  <div class="phase-grid fade-in">
+    <div class="phase-card current">
+      <div class="phase-label">Phase 1 · 今すぐ</div>
+      <h3>基盤構築</h3>
+      <div class="phase-period">〜 2026年4月中旬</div>
+      <ul class="phase-items">
+        <li>4/10 Claude Codeスキル開発（要件整理・通知生成）</li>
+        <li>4/11 依頼フォームUI（React）プロト作成</li>
+        <li>4/12 テスト運用・フィードバック収集</li>
+        <li>4/14 幹部承認 → 全員共有 → 運用開始</li>
+        <li>4/15〜 週1ミーティング開始</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-label">Phase 2 · 拡張</div>
+      <h3>機能拡充</h3>
+      <div class="phase-period">2026年4月下旬 〜 5月</div>
+      <ul class="phase-items">
+        <li>タスクダッシュボードUI構築</li>
+        <li>Chatwork API連携（通知自動化）</li>
+        <li>案件履歴・ナレッジ蓄積機能</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-label">Phase 3 · 定着</div>
+      <h3>組織へ統合</h3>
+      <div class="phase-period">3〜6ヶ月後</div>
+      <ul class="phase-items">
+        <li>運用マニュアルの定着</li>
+        <li>各メンバー役割設定の最終確定</li>
+        <li>評価制度反映（フロー遵守を評価軸に組み込み）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">05 / 06</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">06 · KPI</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- KPI -->
+<section class="slide" id="kpi">
+  <div class="slide-label fade-in">目標指標</div>
+  <h2 class="slide-heading fade-in">3つの<em>数値目標</em></h2>
+  <p class="slide-subheading fade-in">フロー定着後、3〜6ヶ月以内に達成を目指す。</p>
+  <div class="kpi-grid fade-in">
+    <div class="kpi-card">
+      <div class="kpi-value">100%</div>
+      <div class="kpi-label">フォーム遵守率</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">▲30%</div>
+      <div class="kpi-label">プロト納期短縮</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">0件</div>
+      <div class="kpi-label">エラー再発率</div>
+    </div>
+  </div>
+  <div class="slide-number">06 / 06</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="section-divider-text">Conclusion</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<!-- CONCLUSION -->
+<section class="slide" style="min-height: auto; padding: 80px;">
+  <div class="conclusion-box fade-in">
+    <p>
+      <strong>本日中にQ&amp;A・修正意見をお願いします。</strong>
+    </p>
+    <p>
+      Claude Code × Chatworkで、ソウルシンクスの業務効率を加速させましょう。<br>
+      フィードバックを反映し、4月14日の幹部承認に臨みます。
+    </p>
+    <div class="deadline-badge">承認期限 · 2026年4月14日（火）</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SoulSyncs Inc.</div>
+  <div class="footer-copy">提案者：黒沼賢人（執行役員 広報部長） · 2026.04.08</div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Active nav link
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 100) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>
