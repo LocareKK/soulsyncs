@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ディレクター定義・育成マニュアル v3.2 ｜ SoulSyncs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0a0a0a;
+  --dark: #111111;
+  --card: #1a1a1a;
+  --border: #2a2a2a;
+  --white: #f5f5f5;
+  --gray: #888888;
+  --light-gray: #cccccc;
+  --accent: #c8a96e;
+  --accent-light: #e8c98e;
+  --red: #e05252;
+  --green: #52c07a;
+  --blue: #5295e0;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.7;
+}
+
+/* ── NAV ─────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 11px; letter-spacing: 1px; color: var(--gray); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 80px 80px;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(200,169,110,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--accent); text-transform: uppercase; margin-bottom: 24px; }
+.hero h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 700; line-height: 1.2;
+  color: var(--white); margin-bottom: 16px;
+}
+.hero-version { font-size: 13px; color: var(--gray); letter-spacing: 2px; margin-bottom: 32px; }
+.hero-desc { font-size: 16px; color: var(--light-gray); max-width: 620px; line-height: 1.85; margin-bottom: 48px; }
+.hero-meta { display: flex; gap: 48px; }
+.meta-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-label { font-size: 10px; letter-spacing: 3px; color: var(--gray); text-transform: uppercase; }
+.meta-value { font-size: 14px; color: var(--accent); font-weight: 500; }
+
+/* ── SECTION ─────────────────────── */
+.section { padding: 96px 80px; border-bottom: 1px solid var(--border); }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.part-eyebrow { font-size: 10px; letter-spacing: 5px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 700; line-height: 1.3;
+  margin-bottom: 48px; color: var(--white);
+}
+.section-subtitle {
+  font-size: 17px; font-weight: 700; color: var(--light-gray);
+  margin: 48px 0 16px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── ROLE GRID ───────────────────── */
+.role-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); margin-bottom: 40px;
+}
+.role-card { background: var(--card); padding: 32px 28px; }
+.role-number { font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.role-name { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+.role-def { font-size: 12px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+.role-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 10px; padding: 3px 10px; border: 1px solid var(--border); color: var(--gray); }
+
+/* ── HIGHLIGHT BOX ───────────────── */
+.highlight-box { background: var(--card); border: 1px solid var(--border); padding: 24px 28px; margin: 24px 0; }
+.highlight-box .label { font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.highlight-box .content { font-size: 15px; color: var(--light-gray); line-height: 1.85; }
+
+/* ── NOTE ────────────────────────── */
+.note {
+  background: rgba(200,169,110,.06);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px; margin: 16px 0;
+  font-size: 13px; color: var(--gray); line-height: 1.8;
+}
+
+/* ── DATA TABLE ──────────────────── */
+.data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+.data-table th {
+  background: rgba(200,169,110,.1); color: var(--accent);
+  font-weight: 500; padding: 12px 16px; text-align: left;
+  border-bottom: 1px solid rgba(200,169,110,.3);
+  font-size: 11px; letter-spacing: 1px;
+}
+.data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--light-gray); vertical-align: top; line-height: 1.7; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(255,255,255,.02); }
+.td-accent { color: var(--accent) !important; font-weight: 500; }
+
+/* ── FLOW ────────────────────────── */
+.flow {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 28px 32px; margin: 24px 0;
+  font-family: 'Courier New', monospace; font-size: 12px;
+  line-height: 1.8; color: var(--light-gray);
+  overflow-x: auto; white-space: pre;
+}
+
+/* ── ABILITY GRID ────────────────── */
+.ability-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); margin: 24px 0;
+}
+.ability-domain { background: var(--card); padding: 28px 24px; }
+.domain-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.domain-num { font-size: 10px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+.domain-name { font-weight: 700; font-size: 15px; color: var(--white); }
+.domain-count { font-size: 11px; color: var(--gray); margin-left: auto; }
+.ability-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.ability-list li { font-size: 12px; color: var(--gray); padding-left: 16px; position: relative; }
+.ability-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.ability-list li.new::after { content: ' ★'; color: var(--accent); font-size: 10px; }
+.ability-full { grid-column: 1 / -1; }
+.ability-full .ability-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px 0; }
+
+/* ── LEVEL GRID ──────────────────── */
+.level-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); margin: 24px 0;
+}
+.level-card { background: var(--card); padding: 24px 20px; text-align: center; }
+.level-num { font-size: 36px; font-family: 'Noto Serif JP', serif; font-weight: 900; color: var(--accent); opacity: .35; margin-bottom: 8px; }
+.level-name { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.level-desc { font-size: 11px; color: var(--gray); line-height: 1.7; }
+
+/* ── SCORE GRID ──────────────────── */
+.score-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); margin: 24px 0;
+}
+.score-card { background: var(--card); padding: 22px 16px; text-align: center; }
+.score-range { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+.score-stage { font-size: 14px; color: var(--white); font-weight: 500; margin-bottom: 6px; }
+.score-desc { font-size: 10px; color: var(--gray); line-height: 1.6; }
+
+/* ── PHASE TIMELINE ──────────────── */
+.phase-timeline { display: flex; flex-direction: column; gap: 1px; }
+.phase-item {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 24px 28px;
+  display: grid; grid-template-columns: 150px 180px 1fr auto;
+  gap: 24px; align-items: start;
+}
+.phase-label { font-size: 11px; color: var(--accent); letter-spacing: 2px; font-weight: 500; }
+.phase-period { font-size: 11px; color: var(--gray); margin-top: 4px; }
+.phase-focus { font-size: 13px; color: var(--light-gray); line-height: 1.7; }
+.phase-exp { font-size: 12px; color: var(--gray); line-height: 1.8; }
+.phase-score { font-size: 24px; font-family: 'Noto Serif JP', serif; color: var(--accent); font-weight: 700; text-align: right; white-space: nowrap; }
+.phase-score span { font-size: 12px; color: var(--gray); }
+
+/* ── SYSDEV ──────────────────────── */
+.sysdev-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); margin: 24px 0;
+}
+.sysdev-card { background: var(--card); padding: 28px 24px; }
+.sysdev-number { font-size: 10px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.sysdev-name { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.sysdev-def { font-size: 12px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+.sysdev-duties { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.sysdev-duties li { font-size: 11px; color: var(--gray); padding-left: 14px; position: relative; }
+.sysdev-duties li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+
+/* ── TRIGGER TABLE ───────────────── */
+.trigger-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+.trigger-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.trigger-table tr:last-child td { border-bottom: none; }
+.trigger-table tr:hover td { background: rgba(255,255,255,.02); }
+.trigger { font-size: 12px; color: var(--accent); font-weight: 500; line-height: 1.6; width: 260px; }
+.trigger-action { font-size: 13px; color: var(--light-gray); line-height: 1.7; }
+.trigger-owner { font-size: 11px; color: var(--gray); text-align: right; white-space: nowrap; padding-left: 24px; }
+
+/* ── FOOTER ──────────────────────── */
+.footer { padding: 64px 80px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; }
+.footer-brand { font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.footer-version { font-size: 11px; color: var(--gray); }
+.footer-history { font-size: 11px; color: var(--gray); text-align: right; line-height: 2.2; }
+
+/* ── RESPONSIVE ──────────────────── */
+@media (max-width: 900px) {
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero, .section { padding: 96px 24px 64px; }
+  .section { padding: 64px 24px; }
+  .role-grid, .sysdev-grid { grid-template-columns: 1fr; }
+  .ability-grid { grid-template-columns: 1fr; }
+  .ability-full .ability-list { grid-template-columns: repeat(2, 1fr); }
+  .level-grid { grid-template-columns: repeat(2, 1fr); }
+  .score-grid { grid-template-columns: repeat(3, 1fr); }
+  .phase-item { grid-template-columns: 1fr; gap: 8px; }
+  .footer-inner { flex-direction: column; gap: 24px; }
+  .footer { padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">SoulSyncs</span>
+  <ul class="nav-links">
+    <li><a href="#part0">役割定義</a></li>
+    <li><a href="#part1">AI時代</a></li>
+    <li><a href="#part2">プロセス</a></li>
+    <li><a href="#part3">能力マップ</a></li>
+    <li><a href="#part5">育成</a></li>
+    <li><a href="#part6">システム開発</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Internal Document</div>
+  <h1>ディレクター定義<br>育成マニュアル</h1>
+  <div class="hero-version">AI時代対応版 v3.2 ／ 2026年 改訂</div>
+  <p class="hero-desc">受注から納品まで、品質・納期・関係者調整のすべてに責任を持つ現場統括者の定義。管理本部を中心とした組織体制に対応した役割分担・プロセスフロー・評価基準を収録。</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-label">Coverage</span><span class="meta-value">全7パート</span></div>
+    <div class="meta-item"><span class="meta-label">Ability Items</span><span class="meta-value">29項目</span></div>
+    <div class="meta-item"><span class="meta-label">Dev Roles</span><span class="meta-value">4分類</span></div>
+  </div>
+</section>
+
+<!-- PART 0 -->
+<section class="section" id="part0">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 0</div>
+    <h2 class="section-title">組織内役割の全体定義</h2>
+
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-number">Role 01</div>
+        <div class="role-name">営業</div>
+        <div class="role-def">新規顧客獲得と要件の初期整理に専念する担当者</div>
+        <div class="role-tags">
+          <span class="tag">顧客ヒアリング</span><span class="tag">依頼入力</span><span class="tag">期待値初期設定</span>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-number">Role 02</div>
+        <div class="role-name">管理本部</div>
+        <div class="role-def">全案件の受付・振り分け・進捗管理を一元化するハブ</div>
+        <div class="role-tags">
+          <span class="tag">チケット管理</span><span class="tag">アサイン</span><span class="tag">進捗管理</span><span class="tag">納品確認</span>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-number">Role 03</div>
+        <div class="role-name">ディレクター</div>
+        <div class="role-def">管理本部からアサインを受け、受注から納品まで責任を持つ現場統括者</div>
+        <div class="role-tags">
+          <span class="tag">要件定義</span><span class="tag">制作進行</span><span class="tag">品質管理</span><span class="tag">クライアント対応</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-subtitle">クライアント接点のフェーズ切り分け原則</div>
+    <div class="note">「誰が窓口か」ではなく「何を・誰が話すか」でフェーズごとに切り分ける。複数人が接触する場面では、主担当以外は「○○に確認します」として当日中に引き継ぐ。</div>
+    <table class="data-table">
+      <thead><tr><th>フェーズ</th><th>主体</th><th>扱う話題</th></tr></thead>
+      <tbody>
+        <tr><td>受注前〜契約</td><td class="td-accent">担当営業（兼Dir）</td><td>予算・納期・スコープ・契約条件</td></tr>
+        <tr><td>受注後〜納品</td><td class="td-accent">ディレクター（PM兼Dir）</td><td>要件・仕様・進行・修正判断</td></tr>
+        <tr><td>追加提案・継続受注</td><td class="td-accent">担当営業（兼Dir）</td><td>次の提案・関係維持</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-subtitle">管理本部の役職構造</div>
+    <table class="data-table">
+      <thead><tr><th>役職</th><th>職務内容</th></tr></thead>
+      <tbody>
+        <tr><td class="td-accent">管理本部長</td><td>管理本部全体の統括。アサイン方針・エスカレーションの最終判断・体制設計</td></tr>
+        <tr><td class="td-accent">管理責任者</td><td>日常的な受付・チケット登録・ディレクターへのブリーフィング・進捗確認（複数名の兼務体制を想定）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PART 1 -->
+<section class="section" id="part1" style="background:var(--dark);">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 1</div>
+    <h2 class="section-title">AI時代のディレクターとは</h2>
+    <table class="data-table">
+      <thead><tr><th>論点</th><th>従来のプロセス</th><th>AI時代のプロセス</th></tr></thead>
+      <tbody>
+        <tr><td>要件定義のタイミング</td><td>受注後に詳細ヒアリング→要件確定→制作開始</td><td>デモ・プロトタイプを先行制作し、それを見ながら要件を固める</td></tr>
+        <tr><td>修正コストの概念</td><td>修正は工数・費用が発生する「コスト」として扱われる</td><td>AIで高速生成できる前提から「修正は軽い」という認識が広がりやすい</td></tr>
+        <tr><td>品質基準の合意</td><td>最初に仕様書・ワイヤーフレーム等で合意してから着手</td><td>動くものを見ながら都度調整するため「何をもってOKか」が曖昧になりやすい</td></tr>
+        <tr><td>クライアント期待値</td><td>納品物のイメージをすり合わせてから進行</td><td>AI生成の品質・速度への期待が高く、実態とのギャップが生じやすい</td></tr>
+        <tr><td>情報の渡し方</td><td>初回ヒアリングで情報を揃えてから着手</td><td>後出し情報が増えやすく、手戻りが発生しやすい</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight-box">
+      <div class="label">AI時代のディレクターに求められる新たな役割</div>
+      <div class="content">単に「制作を管理する人」ではなく、管理本部・営業・制作・クライアントの間で<br><strong style="color:var(--accent);">「何を・どのタイミングで・どのクオリティで合意するか」を設計・管理できる人材。</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="section" id="part2">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 2</div>
+    <h2 class="section-title">プロジェクト推進プロセスと役割分担</h2>
+
+    <div class="section-subtitle">全体フロー</div>
+    <table class="data-table">
+      <thead><tr><th>フェーズ</th><th>主体</th><th>アクション</th></tr></thead>
+      <tbody>
+        <tr><td>営業フェーズ</td><td class="td-accent">営業</td><td>顧客ヒアリング → 依頼UIに入力 → 管理本部に提出</td></tr>
+        <tr><td>受付フェーズ</td><td class="td-accent">管理本部</td><td>情報確認 → チケット登録 → ディレクターアサイン → ブリーフィング</td></tr>
+        <tr><td>実行フェーズ</td><td class="td-accent">ディレクター</td><td>要件確認 → 制作進行 → 品質管理（進行中はクライアント窓口を担当）</td></tr>
+        <tr><td>完了フェーズ</td><td class="td-accent">ディレクター → 管理本部</td><td>納品 → 完了報告 → 納品レポート生成・案件クローズ</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-subtitle">3つの合意ポイント</div>
+    <div class="note">複雑なフェーズ管理より「この3点で合意を取れているか」を常に確認する。いずれかが「取れていない」と感じた時点でプロセスを止める。</div>
+    <table class="data-table">
+      <thead><tr><th>合意ポイント</th><th>タイミング</th><th>主体</th><th>アウトプット</th></tr></thead>
+      <tbody>
+        <tr><td class="td-accent">① 受注前合意</td><td>見積提出時</td><td>営業</td><td>見積書 / スコープ合意書</td></tr>
+        <tr><td class="td-accent">② 着手前合意</td><td>アサイン後・着手前</td><td>ディレクター + 管理本部</td><td>要件定義書 / デモ承認</td></tr>
+        <tr><td class="td-accent">③ 納品前合意</td><td>納品直前</td><td>ディレクター + 管理本部</td><td>納品確認書 / 納品レポート</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-subtitle">修正判断の裁定フロー</div>
+    <div class="flow">仕様内 / 外の判断         →  ディレクター（PM兼Dir）が即断
+両者で解釈が対立した場合    →  管理本部長が裁定（最終決定）
+追加費用のクライアント交渉  →  担当営業（兼Dir）が対応</div>
+
+    <div class="section-subtitle">営業の最重要ルール</div>
+    <div class="highlight-box">
+      <div class="label">絶対にやってはいけないこと</div>
+      <div class="content">
+        <span style="color:var(--red);">①</span>&nbsp; 管理本部を通さずにディレクターや制作に直接「今日中に対応してください」を依頼する<br>
+        <span style="color:var(--red);">②</span>&nbsp; クライアントとの期待値調整を行わないまま制作を着手させる
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3 -->
+<section class="section" id="part3" style="background:var(--dark);">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 3</div>
+    <h2 class="section-title">ディレクター 能力素養マップ<br><span style="font-size:.6em; color:var(--gray); font-family:'Noto Sans JP',sans-serif; font-weight:300;">5領域 29項目</span></h2>
+
+    <div class="ability-grid">
+      <div class="ability-domain">
+        <div class="domain-header">
+          <span class="domain-num">領域①</span>
+          <span class="domain-name">土台（人間力・マインドセット）</span>
+          <span class="domain-count">6項目</span>
+        </div>
+        <ul class="ability-list">
+          <li>当事者意識</li><li>約束を守る力</li><li>誠実さ</li>
+          <li>素直さ</li><li>やり抜く力</li><li>プロ意識</li>
+        </ul>
+      </div>
+      <div class="ability-domain">
+        <div class="domain-header">
+          <span class="domain-num">領域②</span>
+          <span class="domain-name">コミュニケーション力</span>
+          <span class="domain-count">6項目</span>
+        </div>
+        <ul class="ability-list">
+          <li>ヒアリング力</li><li>翻訳力</li><li>報連相力</li>
+          <li>調整力</li><li>フィードバック力</li><li>依頼力</li>
+        </ul>
+      </div>
+      <div class="ability-domain">
+        <div class="domain-header">
+          <span class="domain-num">領域③</span>
+          <span class="domain-name">プロジェクト管理力</span>
+          <span class="domain-count">7項目</span>
+        </div>
+        <ul class="ability-list">
+          <li>タスク分解力</li><li>スケジュール設計力</li><li>進捗管理力</li>
+          <li>優先順位判断力</li><li>リスク予測力</li><li>問題解決力</li>
+          <li class="new">管理本部連携力</li>
+        </ul>
+      </div>
+      <div class="ability-domain">
+        <div class="domain-header">
+          <span class="domain-num">領域④</span>
+          <span class="domain-name">品質管理力</span>
+          <span class="domain-count">5項目</span>
+        </div>
+        <ul class="ability-list">
+          <li>要件理解力</li><li>品質基準設定力</li><li>チェック力</li>
+          <li>修正指示力</li><li>期待値コントロール力</li>
+        </ul>
+      </div>
+      <div class="ability-domain ability-full">
+        <div class="domain-header">
+          <span class="domain-num">領域⑤</span>
+          <span class="domain-name">ビジネス感覚</span>
+          <span class="domain-count">5項目 ／ Phase 3以降</span>
+        </div>
+        <ul class="ability-list">
+          <li>原価意識</li><li>提案・継続意識</li><li>クライアント理解力</li>
+          <li class="new">AI活用リテラシー</li><li>数字読解力</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">★ = v3.0以降の新設項目。管理本部連携力（領域③）・AI活用リテラシー（領域⑤）。</div>
+  </div>
+</section>
+
+<!-- PART 4 -->
+<section class="section" id="part4">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 4</div>
+    <h2 class="section-title">能力評価基準（4段階）</h2>
+    <div class="level-grid">
+      <div class="level-card"><div class="level-num">0</div><div class="level-name">未習得</div><div class="level-desc">理解も実践もできていない。指摘されても改善されない</div></div>
+      <div class="level-card"><div class="level-num">1</div><div class="level-name">理解段階</div><div class="level-desc">概念は理解している。実践では指示・サポートが必要</div></div>
+      <div class="level-card"><div class="level-num">2</div><div class="level-name">実践段階</div><div class="level-desc">一人で実践できる。応用・判断には確認が必要</div></div>
+      <div class="level-card"><div class="level-num">3</div><div class="level-name">体得段階</div><div class="level-desc">自律的に実践でき、他者に教えられる・チームに波及できる</div></div>
+    </div>
+    <div class="section-subtitle">総合スコアと成長段階（満点 87点）</div>
+    <div class="score-grid">
+      <div class="score-card"><div class="score-range">0〜29</div><div class="score-stage">見習い</div><div class="score-desc">基礎の土台形成が最優先</div></div>
+      <div class="score-card"><div class="score-range">30〜52</div><div class="score-stage">一人前手前</div><div class="score-desc">指示があれば動ける</div></div>
+      <div class="score-card"><div class="score-range">53〜65</div><div class="score-stage">一人前</div><div class="score-desc">単独で案件を完走できる</div></div>
+      <div class="score-card"><div class="score-range">66〜78</div><div class="score-stage">上級</div><div class="score-desc">並走・後輩指導ができる</div></div>
+      <div class="score-card"><div class="score-range">79〜87</div><div class="score-stage">PM候補</div><div class="score-desc">全体を見渡せる。昇格検討ライン</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5 -->
+<section class="section" id="part5" style="background:var(--dark);">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 5</div>
+    <h2 class="section-title">育成フェーズ設計</h2>
+    <div class="phase-timeline">
+      <div class="phase-item">
+        <div><div class="phase-label">Phase 1</div><div class="phase-period">入社〜3ヶ月</div></div>
+        <div class="phase-focus">領域① 土台<br>領域② コミュニケーション</div>
+        <div class="phase-exp">管理本部との連携観察・議事録作成・チケット補佐</div>
+        <div class="phase-score" style="font-size:14px; padding-top:4px;">報連相<br><span>が適切か</span></div>
+      </div>
+      <div class="phase-item">
+        <div><div class="phase-label">Phase 2</div><div class="phase-period">3〜6ヶ月</div></div>
+        <div class="phase-focus">領域③ PM力<br>領域④ 品質管理</div>
+        <div class="phase-exp">小規模案件の主担当（サポートあり）<br>管理本部へのチケット報告の自走</div>
+        <div class="phase-score">49<span>点以上</span></div>
+      </div>
+      <div class="phase-item">
+        <div><div class="phase-label">Phase 3</div><div class="phase-period">6〜12ヶ月</div></div>
+        <div class="phase-focus">全領域の実践<br>AI活用リテラシー</div>
+        <div class="phase-exp">中規模案件の主担当・後輩補佐<br>期待値調整・管理本部との自律連携</div>
+        <div class="phase-score">65<span>点以上</span></div>
+      </div>
+      <div class="phase-item">
+        <div><div class="phase-label">Phase 4</div><div class="phase-period">1年以降</div></div>
+        <div class="phase-focus">領域⑤ ビジネス感覚</div>
+        <div class="phase-exp">複数案件並走・後輩指導・クライアント提案<br>管理本部との体制改善の提言</div>
+        <div class="phase-score">79<span>点以上<br>PM昇格検討</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 6 -->
+<section class="section" id="part6">
+  <div class="section-inner">
+    <div class="part-eyebrow">Part 6</div>
+    <h2 class="section-title">システム開発体制</h2>
+    <div class="note">全社共通フレーム（PART 0〜5）を踏まえつつ、システム開発プロジェクト固有の役割分担・テスト体制・デザイン分担ルールを定める。</div>
+
+    <div class="section-subtitle">役割構造（4分類）</div>
+    <div class="sysdev-grid">
+      <div class="sysdev-card">
+        <div class="sysdev-number">Role 01</div>
+        <div class="sysdev-name">一次窓口 · CS</div>
+        <div class="sysdev-def">Customer Success の最初の受け口。問い合わせを適切な担当者に繋ぐ判断ができる人。1名ずつ育成して増やす。</div>
+        <ul class="sysdev-duties">
+          <li>問い合わせ一次対応</li>
+          <li>不具合報告の受付・トリアージ</li>
+          <li>案件化すべき内容は管理本部に連携</li>
+        </ul>
+      </div>
+      <div class="sysdev-card">
+        <div class="sysdev-number">Role 02</div>
+        <div class="sysdev-name">担当営業兼ディレクター</div>
+        <div class="sysdev-def">反響受けから提案・顧客伴走まで、フロント業務を一貫して担う担当者。</div>
+        <ul class="sysdev-duties">
+          <li>インバウンド反響の受付・ヒアリング</li>
+          <li>提案書作成・プレゼン</li>
+          <li>受注前の期待値初期設定</li>
+          <li>追加提案・継続受注の設計</li>
+        </ul>
+      </div>
+      <div class="sysdev-card">
+        <div class="sysdev-number">Role 03</div>
+        <div class="sysdev-name">PM兼ディレクター</div>
+        <div class="sysdev-def">プロジェクト推進の中核。開発・デザイン・要件をつなぐハブ役。</div>
+        <ul class="sysdev-duties">
+          <li>要件定義の主導・タスク分解</li>
+          <li>開発者への依頼・進捗管理</li>
+          <li>UIUXの最終判断・承認</li>
+          <li>実機テストの最終確認</li>
+          <li>受注後〜納品のクライアント窓口</li>
+        </ul>
+      </div>
+      <div class="sysdev-card">
+        <div class="sysdev-number">Role 04</div>
+        <div class="sysdev-name">開発者</div>
+        <div class="sysdev-def">バックエンド実装の専門担当。技術的な実現に集中する。</div>
+        <ul class="sysdev-duties">
+          <li>バックエンド実装</li>
+          <li>API設計・DB設計</li>
+          <li>技術的な問題解決</li>
+          <li>UIUXの最終判断はPM兼Dirに委ねる</li>
+          <li>実機テストの単独完結は行わない</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-subtitle">実機テスト体制（属人化解消）</div>
+    <table class="data-table">
+      <thead><tr><th>ルール</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td class="td-accent">テスト項目の作成</td><td>PM兼Dirが要件定義書の「確認ポイント」列に記載する（別途チェックリストは作らない）</td></tr>
+        <tr><td class="td-accent">一次テスト実施者</td><td>担当営業兼Dir（クライアント目線での確認）</td></tr>
+        <tr><td class="td-accent">最終確認</td><td>PM兼Dir（要件定義書との整合チェック）</td></tr>
+        <tr><td class="td-accent">合否基準</td><td>要件定義書の記載内容を満たすかどうかで判断（担当者の主観不可）</td></tr>
+        <tr><td class="td-accent">開発者の関与</td><td>テスト実施には原則参加しない。修正依頼を受けてから対応する</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-subtitle">UIUXデザイン分担ルール</div>
+    <table class="data-table">
+      <thead><tr><th>分担</th><th>担当</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>UIUXの最終判断・承認</td><td class="td-accent">PM兼ディレクター</td><td>ユーザー視点でのUI/UX判断。開発者の案を評価・修正指示</td></tr>
+        <tr><td>UIデザイン案の提示</td><td class="td-accent">開発者</td><td>実装可能な範囲でのUI提案。「これはできない」の根拠を明示</td></tr>
+        <tr><td>デザイン品質の最終確認</td><td class="td-accent">担当営業兼ディレクター</td><td>クライアント視点での確認。提案時の期待値との整合性チェック</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-subtitle">移行ロードマップ（トリガーベース）</div>
+    <table class="trigger-table">
+      <tbody>
+        <tr><td class="trigger">本文書の合意完了後すぐ</td><td class="trigger-action">クライアント窓口フェーズルール・修正裁定フローの運用開始</td><td class="trigger-owner">全員</td></tr>
+        <tr><td class="trigger">要件定義書フォーマット確定後</td><td class="trigger-action">「確認ポイント」列の追加・実機テスト新体制の運用開始</td><td class="trigger-owner">PM兼Dir</td></tr>
+        <tr><td class="trigger">UIUXレビューフロー合意後</td><td class="trigger-action">PM兼DirによるUIUX最終承認フローの運用開始</td><td class="trigger-owner">PM兼Dir</td></tr>
+        <tr><td class="trigger">一次窓口・CS育成開始の意思決定後</td><td class="trigger-action">スキルセット定義・OJT開始（1名ずつ）</td><td class="trigger-owner">管理本部長 + PM兼Dir</td></tr>
+        <tr><td class="trigger">クラプロ撤退決定後</td><td class="trigger-action">兼務優先順位を管理本部長と合意・体制移行</td><td class="trigger-owner">管理本部長</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">SoulSyncs</div>
+      <div class="footer-version">ディレクター定義・育成マニュアル v3.2 ／ 2026年 改訂</div>
+    </div>
+    <div class="footer-history">
+      v1.0 ― 三枝 作成（基本定義）<br>
+      v2.0 ― 2025年 改訂（AI時代対応版）<br>
+      v3.0 ― 2026年 改訂（管理本部ハブ構造）<br>
+      v3.1 ― システム開発体制追加<br>
+      v3.2 ― 現実的運用優先の改善
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
